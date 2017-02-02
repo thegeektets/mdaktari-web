@@ -3,6 +3,10 @@
 body {
   position: relative;
 }
+
+label {
+  color:#fff !important;
+}
 .columns {
     position: relative;
     margin-top: 15px;
@@ -229,14 +233,6 @@ body {
 }
 
 
-/* alerts */
-
-.alert-box.success {
-    background: #38b451;
-    color: #fff;
-    text-align: center;
-    font-size: 18px;
-}
 /* patient login */
 
 .patient_login {
