@@ -6,7 +6,9 @@ This application allows users to sign up and make appointments with their fav do
 
 ###################
 
-Dezari Ventures ltd
-dezaritechnologies.com
+build by :- Dezari Ventures ltd
+
+###################
+http://www.dezaritechnologies.com
 
 ###################
