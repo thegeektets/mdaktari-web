@@ -69,7 +69,7 @@ class Registration extends CI_Controller {
     					  $data['message'] = 	'Registration Successfull <br/>
     											 Failed to send email <br/>';
     					}
-    					$this->load->view('registration/patient_reg' , $data);
+    					$this->load->view('registration/index' , $data);
     				} else {
 	    				$data['success'] = FALSE;
 	    				$data['message'] = $value['message'];
@@ -146,6 +146,100 @@ class Registration extends CI_Controller {
     $this->load->view('registration/footer');                          
    
 }
+	public function login_user() {
+      
+      $this->load->library('session');
+      $data['success']=("") ;
+  	  $this->load->helper(array('form', 'url'));
+      $this->load->library('form_validation');
+      $this->form_validation->set_rules('login_email', 'login_email', 'required'); 
+      $this->form_validation->set_rules('login_password', 'login_password', 'required');
+      $result = ""; 
+                      
+	    if ($this->form_validation->run() == FALSE) {
+	 	   $data['success'] = FALSE;
+	 	   $data['message'] =  'Validation error all fields are required';
+	 	   $this->load->view('registration/header', $data);
+	       $this->load->view('registration/index',$data);
+	       $this->load->view('registration/footer');   
+	     
+	    } else {
+	       $user_pass = $this->user_model->get_user_pass();
+	       $user_meta = $this->user_model-> get_user_meta();
+	   
+	          if(md5($this->input->post("login_password")) === $user_pass) {
+			       	
+		       		$newdata = array(
+		       		        'user_meta'  => $user_meta,
+		       		        'logged_in' => TRUE,
+		       		        );
+		       		$this->session->set_userdata($newdata);
+		       		$user_session = $this->session->all_userdata();
+		   			$this->dashboard();
+			     
+		        
+		        } else {
+			 	   $data['success'] = FALSE;
+			 	   $data['message'] =  'Login failed , email or password is incorrect';
+			 	   $this->load->view('registration/header', $data);
+			       $this->load->view('registration/index',$data);
+			       $this->load->view('registration/footer');   
+			    }
+    	}
+
+	}
+	public function dashboard()
+	{
+		$this->load->library('session');
+		$user_session = $this->session->all_userdata();
+
+		var_dump($user_session['logged_in']);
+		
+		if( isset($user_session) && ($user_session['logged_in'] === FALSE )) {
+		
+			   $data['success'] = FALSE;
+		 	   $data['message'] =  'Login is required';
+		 	   $this->load->view('registration/header', $data);
+		       $this->load->view('registration/index',$data);
+		       $this->load->view('registration/footer');
+		
+		} else {
+			if($user_session['user_meta']['0']['user_type'] == 'patient') {
+
+				$this->open_patient_dashboard();
+			
+			} else if ( $user_session['user_meta']['0']['user_type'] == 'doctor' ) {
+
+				$this->open_doctor_dashboard();
+			
+			} else {
+				$this->open_admin_dashboard();
+			}
+		}
+	}
+
+	public function open_patient_dashboard(){
+	    $this->load->library('session');
+	    $this->load->helper('url');
+	    $user_session=$this->session->all_userdata();
+	   	$result = "";
+	   	header('Location:'.base_url('index.php/patient'));
+	}
+
+	public function open_doctor_dashboard(){
+	    $this->load->library('session');
+	    $this->load->helper('url');
+	    $user_session=$this->session->all_userdata();
+	   	$result = "";
+	   	header('Location:'.base_url('index.php/doctor'));
+	}
+	public function open_admin_dashboard(){
+	    $this->load->library('session');
+	    $this->load->helper('url');
+		$user_session=$this->session->all_userdata();
+		header('Location:'.base_url('index.php/admin'));
+	}
+
 	public function initializemail() {
 	    $this->load->library('email');
 		 $config['useragent'] = 'CodeIgniter';
@@ -201,6 +295,18 @@ class Registration extends CI_Controller {
 	         $pass[] = $alphabet[$n];
 	     }
 	     return implode($pass); //turn the array into a string
-	 } 
+	}
+
+	public function logout() 
+	{
+		$this->load->library('session');
+		$this->load->helper(array('form', 'url'));
+		$this->session->sess_destroy();
+        $data['success']= 'TRUE';
+        $data['message'] = 	'you have been logged out successfully';
+		$this->load->view('registration/header', $data);
+		$this->load->view('registration/login' , $data);
+		$this->load->view('registration/footer');
+	}
 	
 }

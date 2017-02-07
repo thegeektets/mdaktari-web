@@ -113,30 +113,30 @@ class User_model extends CI_Model {
             $ppic =   $upload_data['file_name'];
             $pic = base_url("assets/uploads/".$ppic); 
             $query = 
-            $this->db->query(" UPDATE users SET avatar = ".$this->db->escape($pic)." WHERE id = ".$this->db->escape($id));
+            $this->db->query(" UPDATE user SET avatar = ".$this->db->escape($pic)." WHERE id = ".$this->db->escape($id));
         }
         public function change_user_password($id) {
             $password = $this->input->post('txt_npassword');
-            $sql = "UPDATE users SET password = ".
+            $sql = "UPDATE user SET password = ".
              $this->db->escape(md5($password)) ." WHERE id = ".$this->db->escape($id);
              $this->db->query($sql);        
         }
         public function update_approve_status($email){
-            $sql = "UPDATE users SET approve_status = TRUE WHERE email = ".$this->db->escape($email);
+            $sql = "UPDATE user SET approve_status = TRUE WHERE email = ".$this->db->escape($email);
              $this->db->query($sql);           
         }
         public function update_approve_code($code,$email){
-            $sql = "UPDATE users SET approve_code = ".
+            $sql = "UPDATE user SET approve_code = ".
              $this->db->escape($code) ." WHERE email = ".$this->db->escape($email);
              $this->db->query($sql);           
         }
         public function update_user_login($email, $account) {
-           $sql = "UPDATE users SET login = TRUE , account =  ".
+           $sql = "UPDATE user SET login = TRUE , account =  ".
             $this->db->escape($account)." WHERE email = ".$this->db->escape($email);
             if(!$this->db->query($sql)) {
                 return $this->db->error(); 
             } else {
-                $fquery = $this->db->query("select * from users where email = '".$email ."'");
+                $fquery = $this->db->query("select * from user where email = '".$email ."'");
                 foreach ($fquery->result() as $row)
                     {
                     $queryid = $row->id;
@@ -153,38 +153,42 @@ class User_model extends CI_Model {
                 return TRUE;
             }
         }
+        public function get_all_users() {
+            $query = $this->db->query("select * from user");
+            return $query->result_array();
+        }
         public function get_user_pass() {
-                $email = $this->input->post("txt_email");
-                $query = $this->db->query("select * from users where email = '".$email ."'");
+                $email = $this->input->post("login_email");
+                $query = $this->db->query("select * from user where email = '".$email ."'");
                 foreach ($query->result() as $row)
                     {
                     return $row->password;
                     }
         }
         public function get_code_user($code) {
-                $query = $this->db->query("select * from users where approve_code = '".$code."'");
+                $query = $this->db->query("select * from user where approve_code = '".$code."'");
                 return $query->result_array();
         }
 
         public function get_user_approval() {
                 $email = $this->input->post("txt_email");
-                $query = $this->db->query("select * from users where email = '".$email ."'");
+                $query = $this->db->query("select * from user where email = '".$email ."'");
                 foreach ($query->result() as $row)
                     {
                     return $row->approve_status;
                     }
         }
         public function get_user_smeta($email) {
-                $query = $this->db->query("select * from users where email = '".$email ."'");
+                $query = $this->db->query("select * from user where email = '".$email ."'");
                    return $query->result_array();
         }
         public function get_user_meta() {
-                $email = $this->input->post("txt_email");
-                $query = $this->db->query("select * from users where email = '".$email ."'");
+                $email = $this->input->post("login_email");
+                $query = $this->db->query("select * from user where email = '".$email ."'");
                    return $query->result_array();
         }
         public function get_user_details($id) {
-                $query = $this->db->query("select * from user_details,users where users.id = user_details.user_id AND users.email = '".$id ."'");
+                $query = $this->db->query("select * from user_details,user where users.id = user_details.user_id AND users.email = '".$id ."'");
                    return $query->result_array();
         }
         public function get_payment_details($id) {

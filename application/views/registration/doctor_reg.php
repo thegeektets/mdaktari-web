@@ -9,7 +9,7 @@
           </div>
         </div>
         <div class="large-8 columns">
-            <form>
+            <form name="doctor_form" id="doctor_form" <?php echo form_open('registration/doctor_reg'); ?>
             <div class="large-6 columns">
                   <label>FullName </label>
                   <input type="text" name="doctor_fullname" placeholder="Fullname" class="primary_color">
@@ -34,7 +34,7 @@
                   <label>Confirm Password </label>
                   <input type="password" name="doctor_cpassword" placeholder="Confirm Passoword" class="primary_color">
                   
-                  <button class="button button_info"> SIGN UP</button>
+                  <button type="submit" class="button button_info"> SIGN UP</button>
 
                   <div class="login_footer">
                     <span class="login_join"> NOT A DOCTOR? SIGN UP</span>

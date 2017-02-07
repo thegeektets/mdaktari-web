@@ -234,8 +234,25 @@ body {
 .alert-box.success {
     background: #38b451;
     color: #fff;
+    padding: 10px;
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.alert-box.warning {
+    background: #f8991c;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.close {
+    float: right;
+    color: #fff;
+}
+.close:hover {
+    color: red;
 }
 /* patient login */
 

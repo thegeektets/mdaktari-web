@@ -23,9 +23,10 @@ $(document).ready(function(){
 	  }
 	);
 	
-
-	
-	
+	$('.close').click(function() {
+		console.log('close alert');
+		$(this).parents().find(".alert-box").css("display","none")
+	});
 
 });
    
