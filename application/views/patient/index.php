@@ -3,28 +3,28 @@
         <div class="top-bar-left">
           <ul class="dropdown menu" data-dropdown-menu>
             <li class="menu-text active">
-              <a href="patient_dashboard.html"> My Dashboard </a>
+              <a href="<?php echo base_url('index.php/patient'); ?>"> My Dashboard </a>
             </li>
             <li class="menu-text">
-              <a href="my_account.html"> My Account </a>
+              <a href="<?php echo base_url('index.php/patient/my_account'); ?>"> My Account </a>
             </li>
             <li class="menu-text">
-              <a href="appointments.html"> My Appointments </a>
+              <a href="<?php echo base_url('index.php/patient/my_appointments'); ?>"> My Appointments </a>
             </li>
              <li class="menu-text">
-              <a href="appointments.html"> My Reviews </a>
+              <a href="<?php echo base_url('index.php/patient/my_reviews'); ?>"> My Reviews </a>
             </li>
           </ul>
         </div>
       </div>
     </div>
-
+    <?php //var_dump($user_profile) ?>
     <div class="my_pimabima">
          <div class="large-2 columns">
          </div>
          <div class="large-3 columns my_pimabima_item">
               <img src="<?php echo base_url('/assets/img/avatar.png')?>" class="avatar_img">
-              <div> Griffin Muteti </div>
+              <div>  <?php echo $user_profile['0']['fullname']; ?> </div>
          </div>
          <div class="large-2 columns my_pimabima_item">
               <div class="mypb_item_title"> APPOINTMENT HISTORY </div>

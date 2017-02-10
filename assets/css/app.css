@@ -93,6 +93,10 @@ body {
   float: left;
 }
 
+.user_points a {
+  color: #fff;
+}
+
 /* colors and backgrounds */
 
 .info_bg {
@@ -156,7 +160,6 @@ body {
   color: #38b451;
   background-color: #fff;
   border: 1px solid #38b451;
-  position: absolute;
   top: calc(180px);
 }
 .button_edit:hover , .button_edit:focus {
@@ -422,7 +425,6 @@ body {
 .modal_body > form > .form_group{
   margin-left: 10px;
   margin-top:10px;
-  border: 1px solid #C1C1C1;
   padding: 5px;
   padding-top: 10px;
   padding-bottom: 10px;

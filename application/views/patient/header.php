@@ -23,7 +23,8 @@
       <div class="row">  
         <div class="top-bar-left">
           <div class="logo">
-            <img src="<?php echo base_url('/assets/img/mdaktari_logo.png')?>">
+          <a href="<?php echo base_url();?>">
+              <img src="<?php echo base_url('/assets/img/mdaktari_logo.png')?>">
           </div>
           
 
