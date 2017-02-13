@@ -1,0 +1,40 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Calendar extends CI_Controller {
+
+	public function __construct()
+	{
+       parent::__construct();
+       $this->load->model('user_model');
+       $this->load->model('doctor_model');
+       $this->load->model('calendar_model');
+       error_reporting(0);
+   	}
+	
+   	public function calset_form() {
+   		$data['success'] = '';
+   	    $this->load->helper(array('form', 'url'));
+   	  
+       	$this->load->view('doctor/header', $data);
+
+       
+		$value = $this->calendar_model->update_calsettings();
+		$data['calendar'] = $this->calendar_model->load_calendar();
+		
+		if ( $value == TRUE){
+			$data['success'] = TRUE;
+			$data['message'] = "Calendar Settings Updated Successfully";
+		} else {
+			$data['success'] = FALSE;
+			$data['message'] = $value['message'];
+	    }
+	    $this->load->view('doctor/calendar' , $data);
+		$this->load->view('doctor/footer');                          
+   	   
+   	}
+
+
+
+
+}

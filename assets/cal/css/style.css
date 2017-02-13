@@ -489,6 +489,10 @@ ul.side-icons li a.goog{
 }
 /*--//copy-right--*/
 /*--start-responsive-design--*/
+.main {
+    display: inline-block;
+    margin: 0px !important;
+}
 @media (max-width:1600px){
 	.slide {
        float: left;
@@ -498,7 +502,7 @@ ul.side-icons li a.goog{
 	.main {
 	    margin:6em auto 6em;
 		text-align: center;
-		width: 80%;
+		width: 100%;
 	}
 }
 @media (max-width:1440px){

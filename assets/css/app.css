@@ -518,7 +518,7 @@ img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
 }
 .product_tab_content {
   border: none;
-  margin-top: 25px;
+  margin-top: 5px;
   text-align: left;
 }
 .insuarance_item {
@@ -735,4 +735,17 @@ img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
 }
 .copyright {
   font-size:14px;
+}
+
+
+/* custom styles */
+
+.session_div {
+    padding-top: 35px;
+    padding-bottom: 7px;
+}
+
+.availability_div {
+    padding-top: 38px;
+    padding-bottom: 27px;
 }
