@@ -34,6 +34,14 @@ class Calendar extends CI_Controller {
    	   
    	}
 
+   	public function check_availability($doctor_id, $date) {
+   		// return false for not available or object with time available
+   		/* 1. check if day is off day on calendar settings and on the schedule - if it is then unavailable 
+		   2. if date is not an off day - load bookings for that day 
+		   3. see if any slots remain for that day - return remaing slots otherwise not available
+   		*/
+   	}
+
 
 
 
