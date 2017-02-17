@@ -36,7 +36,7 @@
       </div>
       <div class="copyright">
         <div class="row">
-        (c) 2016 MDAKTARI
+        (c) <?php echo date('Y')?> MDAKTARI
         </div>
       </div>
    </footer>

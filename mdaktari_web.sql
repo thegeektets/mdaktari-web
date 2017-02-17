@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Feb 13, 2017 at 03:21 WB
+-- Host: 127.0.0.1
+-- Generation Time: Feb 17, 2017 at 07:27 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -23,10 +23,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `appointment_calendar`
+-- Table structure for table `bookings_calendar`
 --
 
-CREATE TABLE `appointment_calendar` (
+CREATE TABLE `bookings_calendar` (
   `appointment_id` int(11) NOT NULL,
   `appointment_title` varchar(200) NOT NULL,
   `appointment_desc` varchar(500) NOT NULL,
@@ -64,19 +64,6 @@ INSERT INTO `calendar_settings` (`cal_id`, `work_day`, `start_time`, `end_time`,
 (54, 4, '08:00:00', '18:00:00', NULL, 1),
 (55, 5, '00:00:00', '00:00:00', NULL, 0),
 (56, 6, '00:00:00', '00:00:00', NULL, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `doctor_calendar`
---
-
-CREATE TABLE `doctor_calendar` (
-  `doctor_id` int(11) NOT NULL,
-  `time` date NOT NULL,
-  `date` time NOT NULL,
-  `availability` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -161,10 +148,18 @@ INSERT INTO `patient_table` (`patient_id`, `fullname`, `dob`, `sex`, `town`, `co
 CREATE TABLE `schedule_calendar` (
   `doctor_id` int(11) NOT NULL,
   `date` date NOT NULL,
-  `time` time NOT NULL,
-  `availability_schedule` varchar(100) NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
   `schedule_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `schedule_calendar`
+--
+
+INSERT INTO `schedule_calendar` (`doctor_id`, `date`, `start_time`, `end_time`, `schedule_id`) VALUES
+(11, '2017-02-17', '08:00:00', '18:00:00', 1),
+(11, '2017-02-18', '08:00:00', '18:00:00', 9);
 
 -- --------------------------------------------------------
 
@@ -198,9 +193,9 @@ INSERT INTO `user` (`id`, `email`, `password`, `user_type`, `signup_date`, `logi
 --
 
 --
--- Indexes for table `appointment_calendar`
+-- Indexes for table `bookings_calendar`
 --
-ALTER TABLE `appointment_calendar`
+ALTER TABLE `bookings_calendar`
   ADD PRIMARY KEY (`appointment_id`);
 
 --
@@ -245,9 +240,9 @@ ALTER TABLE `user`
 --
 
 --
--- AUTO_INCREMENT for table `appointment_calendar`
+-- AUTO_INCREMENT for table `bookings_calendar`
 --
-ALTER TABLE `appointment_calendar`
+ALTER TABLE `bookings_calendar`
   MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `calendar_settings`
@@ -273,7 +268,7 @@ ALTER TABLE `patient_table`
 -- AUTO_INCREMENT for table `schedule_calendar`
 --
 ALTER TABLE `schedule_calendar`
-  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `user`
 --

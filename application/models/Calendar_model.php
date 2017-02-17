@@ -54,6 +54,18 @@ class Calendar_model extends CI_Model {
             return TRUE;
         }
 
+    public function update_schedule($doctor_id) {
+        $date = $this->input->post('date');
+        $start_time = $this->input->post('start_time');
+        $end_time = $this->input->post('end_time');
+
+        $query = "INSERT INTO schedule_calendar (doctor_id, date, start_time, end_time ) 
+                  VALUES (". $this->db-> escape($doctor_id) . ", ". $this->db->escape($date).","
+                  .$this->db->escape($start_time).",".$this->db->escape($end_time).")";
+        $this->db->query($query);
+        return TRUE;
+
+    }
     public function load_calendar(){
         $query = $this->db->query("select * from calendar_settings");
         return $query->result_array();

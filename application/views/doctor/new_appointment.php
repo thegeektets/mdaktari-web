@@ -8,7 +8,7 @@
             <li class="menu-text">
               <a href="<?php echo base_url('index.php/doctor/my_account'); ?>"> My Account </a>
             </li>
-            <li class="menu-text">
+            <li class="menu-text active">
               <a href="<?php echo base_url('index.php/doctor/my_calendar'); ?>"> My Calendar </a>
             </li>
             <li class="menu-text active">
@@ -30,8 +30,16 @@
                 </div>
                 <div class="large-10 columns">
                       <div class="doctor_profile_title">
-                          <h3> Dr. Betty G Kanini </h3>
-                          <h5> Heart Specialist </h5>
+                          <h3> 
+                            <?php if (isset($user_profile)) {
+                              echo $user_profile['0']['fullname'];
+                            } ?>
+                          </h3>
+                          <h5>
+                            <?php if (isset($user_profile)) {
+                              echo $user_profile['0']['speciality'];
+                            } ?>
+                          </h5>
                         
                       </div>
                 </div>
@@ -41,6 +49,19 @@
         <hr/>
         <div class="row">
           <div class="large-8 columns">
+            <?php
+                  if( isset($success) && ($success === TRUE)) {
+                      echo '<div class="alert-box success">'
+                            .$message.'
+                            <a href="#"" class="close" id="close">&times;</a>
+                            </div>';
+                  } else if( isset($success) && ($success === FALSE)) {
+                      echo '<div class="alert-box warning">'
+                            .$message.'
+                            <a href="#"" class="close" id="close">&times;</a>
+                            </div>';
+                  }
+               ?>
             <form class="appointment_form">
               <div class="appointment_title">
                   Add New Appointment

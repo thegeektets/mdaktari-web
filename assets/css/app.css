@@ -748,4 +748,20 @@ img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
 .availability_div {
     padding-top: 38px;
     padding-bottom: 27px;
+} 
+
+.schedule_title {
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  font-weight: 400;
+  font-family: 'Gotham';
+}
+.schedule_link {
+    text-align: right;
+    padding: 5px;
+}
+.schedule_link a {
+  font-size: 18px;
+  color: #fff;
 }

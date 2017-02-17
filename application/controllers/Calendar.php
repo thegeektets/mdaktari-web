@@ -34,6 +34,28 @@ class Calendar extends CI_Controller {
    	   
    	}
 
+   	public function update_schedule() {
+   		$data['success'] = '';
+   	    $this->load->helper(array('form', 'url'));
+   	    $this->load->library('session');
+		$data['user_session'] = $this->session->all_userdata();
+		$user_id = $data['user_session']['user_meta']['0']['id'];
+		$data['user_profile'] = $this->user_model->get_user_profile($user_id);	
+   	   	$this->load->view('doctor/header', $data);
+		$value = $this->calendar_model->update_schedule($user_id);
+		$data['calendar'] = $this->calendar_model->load_calendar();
+		
+		if ( $value == TRUE){
+			$data['success'] = TRUE;
+			$data['message'] = "Personal Schedule Updated Successfully";
+	
+		} else {
+			$data['success'] = FALSE;
+			$data['message'] = 'Failed to update schedule </br>'.$value['message'];
+	    }
+	    $this->load->view('doctor/update_schedule' , $data);
+		$this->load->view('doctor/footer'); 
+   	}
    	public function check_availability($doctor_id, $date) {
    		// return false for not available or object with time available
    		/* 1. check if day is off day on calendar settings and on the schedule - if it is then unavailable 

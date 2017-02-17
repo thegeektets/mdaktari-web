@@ -101,8 +101,8 @@ body h1 {
     float: left;
     width: 48%;
 	background: #38b451;
-    border-left: 25px solid #38b451;
-    padding: 5em 0em 5.04em 0em;
+    /* border-left: px solid #38b451; */
+    padding-top: 1em;
 }
 #slider2,
 #slider3 {
@@ -497,7 +497,7 @@ ul.side-icons li a.goog{
 	.slide {
        float: left;
 	   width: 48%;
-	   padding: 5em 0em 5.2em 0em;
+	   padding-top: 1em;
 	}
 	.main {
 	    margin:6em auto 6em;
