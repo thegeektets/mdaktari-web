@@ -15,12 +15,14 @@ class Calendar extends CI_Controller {
    	public function calset_form() {
    		$data['success'] = '';
    	    $this->load->helper(array('form', 'url'));
-   	  
-       	$this->load->view('doctor/header', $data);
+   	  	$this->load->library('session');
+		$data['user_session'] = $this->session->all_userdata();
+		$user_id = $data['user_session']['user_meta']['0']['id'];
+		$this->load->view('doctor/header', $data);
 
        
-		$value = $this->calendar_model->update_calsettings();
-		$data['calendar'] = $this->calendar_model->load_calendar();
+		$value = $this->calendar_model->update_calsettings($user_id);
+		$data['calendar'] = $this->calendar_model->load_calendar($user_id);
 		
 		if ( $value == TRUE){
 			$data['success'] = TRUE;

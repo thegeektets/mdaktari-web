@@ -8,7 +8,7 @@ class Calendar_model extends CI_Model {
                 $this->load->database(); 
         }
 
-        public function update_calsettings() {
+        public function update_calsettings($doctor_id) {
             
             $start_time_0 = $this->input->post("start_time_0");
             $start_time_1 = $this->input->post("start_time_1");
@@ -42,12 +42,12 @@ class Calendar_model extends CI_Model {
             $off_day_5 = $this->input->post("off_day_5");
             $off_day_6 = $this->input->post("off_day_6");
 
-            $sql = "DELETE FROM calendar_settings";
+            $sql = "DELETE FROM calendar_settings WHERE doctor_id = ".$doctor_id;
             $this->db->query($sql);
 
             for($i = 0 ; $i < 7; $i++){
-                $query = "INSERT INTO calendar_settings (work_day, start_time, end_time, off_day , sess_duration)" .
-                "VALUES (" . $this->db->escape($i).",".$this->db->escape(${'start_time_'.$i}).",".$this->db->escape(${'end_time_'.$i}).",".$this->db->escape(${'off_day_'.$i}).",".$this->db->escape(${'sess_duration_'.$i}).")";
+                $query = "INSERT INTO calendar_settings (work_day, start_time, end_time, off_day , sess_duration , doctor_id)" .
+                "VALUES (" . $this->db->escape($i).",".$this->db->escape(${'start_time_'.$i}).",".$this->db->escape(${'end_time_'.$i}).",".$this->db->escape(${'off_day_'.$i}).",".$this->db->escape(${'sess_duration_'.$i}) .",".$this->db->escape($doctor_id).")";
                 $this->db->query($query);
             }
 
@@ -66,8 +66,12 @@ class Calendar_model extends CI_Model {
         return TRUE;
 
     }
-    public function load_calendar(){
-        $query = $this->db->query("select * from calendar_settings");
+    public function load_calendar($doctor_id){
+        $query = $this->db->query("select * from calendar_settings WHERE doctor_id = ".$doctor_id);
+        return $query->result_array();  
+    }
+    public function load_personalschedule($doctor_id){
+        $query = $this->db->query("select * from schedule_calendar WHERE doctor_id = ".$doctor_id);
         return $query->result_array();
     }
 }   

@@ -56,25 +56,23 @@
                                 </div>
                           </div>
                       </div>
-                      <div class="slide">
-                          <h3 class="schedule_title"> Todays Schedule </h3>
-                          <hr/>
+                      <div class="slide" style="padding: 0px">
                           <div class="schedule_link">
-                              <a href="<?php echo base_url('index.php/doctor/update_schedule'); ?>">
                                   Update Personal Schedule
-                                  <a href="#" class="button round">
+                                  <a href="<?php echo base_url('index.php/doctor/update_schedule'); ?>" class="button secondary">
                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                   </a>
 
-                                  
-                              </a>
                           </div>
                           <div class="schedule_link">
-                              <a href="<?php echo base_url('index.php/doctor/add_appointment'); ?>">
                                   Add New Appointment
-                                  <button class="button"></button>
-                              </a>
+                                   <a href="<?php echo base_url('index.php/doctor/add_appointment'); ?>" class="button secondary">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                  </a>
                           </div>
+                          <h3 class="schedule_title"> Todays Schedule </h3>
+                          <hr/>
+                         
                           
                         
                       </div>

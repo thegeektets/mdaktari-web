@@ -96,19 +96,23 @@
             <div class="slide_full">
                           <h5 class="schedule_title"> Personal Schedule </h5>
                           <hr/>
+                          <?php 
+                            for($i=0; $i < count($schedule); $i++){
+                          ?>
                           <div class="schedule_item">
-                              <a href="<?php echo base_url('index.php/doctor/update_schedule'); ?>">
-                                  Update Personal Schedule
-                                  <button class="button btn-primary"></button>
-                                  <button class="button btn-danger"></button>
-                              </a>
-                          </div>
-                          <div class="schedule_link">
-                              <a href="<?php echo base_url('index.php/doctor/add_appointment'); ?>">
-                                  Add New Appointment
-                                  <button class="button btn-warn"></button>
-                              </a>
-                          </div>
+                              <p>
+                                Date : <?php echo $schedule[$i]['date']; ?>
+                              </p>
+                              <p>
+                                Start Time : <?php echo $schedule[$i]['start_time']; ?>
+                              </p>
+                              <p>
+                                End Time : <?php echo $schedule[$i]['end_time']; ?>
+                              </p>
+                                <a class="button secondary" href="<?php echo base_url('index.php/doctor/update_schedule'); ?>"> Edit Item </a>
+                                <a class="button alert" href="<?php echo base_url('index.php/doctor/update_schedule'); ?>"> Delete Item </a>
+                           </div>
+                          <?php } ?>
                           
                         
                       </div>

@@ -57,10 +57,10 @@ class Doctor extends CI_Controller {
 	{
 		$this->load->library('session');
 		$data['user_session'] = $this->session->all_userdata();
-		$data['calendar'] = $this->calendar_model->load_calendar();
 		
 		if(isset($data['user_session']['logged_in']) && $data['user_session']['logged_in'] == 'TRUE'){
 			$user_id = $data['user_session']['user_meta']['0']['id'];
+			$data['calendar'] = $this->calendar_model->load_calendar($user_id);
 			$data['user_profile'] = $this->user_model->get_user_profile($user_id);
 			$this->load->helper(array('form', 'url'));
 			$this->load->view('doctor/header' , $data);
@@ -103,6 +103,7 @@ class Doctor extends CI_Controller {
 		if(isset($data['user_session']['logged_in']) && $data['user_session']['logged_in'] == 'TRUE'){
 			$user_id = $data['user_session']['user_meta']['0']['id'];
 			$data['user_profile'] = $this->user_model->get_user_profile($user_id);
+			$data['schedule'] = $this->calendar_model->load_personalschedule($user_id);
 			$this->load->helper(array('form', 'url'));
 			$this->load->view('doctor/header' , $data);
 			$this->load->view('doctor/update_schedule', $data);
