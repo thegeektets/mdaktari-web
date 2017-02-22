@@ -56,6 +56,65 @@ class Patient extends CI_Controller {
 		
 	}
 
+		public function update_account_details(){
+		$this->load->library('session');
+		$data['user_session'] = $this->session->all_userdata();
+		$user_id = $data['user_session']['user_meta']['0']['id'];
+		$data['user_profile'] = $this->user_model->get_user_profile($user_id);
+			
+		$this->load->helper(array('form', 'url'));
+	    $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('patient_fullname', 'patient_fullname ', 'required'); 
+        $this->form_validation->set_rules('patient_gender', 'patient_gender ', 'required'); 
+        $this->form_validation->set_rules('patient_dob', 'patient_dob', 'required'); 
+        $this->form_validation->set_rules('patient_phone', 'patient_phone', 'required'); 
+       
+        if ($this->form_validation->run() === FALSE) {
+        		$data['success'] = FALSE;
+        		$data['message'] =  'Validation error';
+        } else {
+               
+        	   if(strlen($_FILES['useravatar']['name']) > 0) {
+        	   		 
+        	   		 $config['upload_path'] = './assets/uploads/';
+    	   			 $config['allowed_types'] = 'gif|jpg|png';
+    	   			 $config['max_size'] = '100000';
+    	   			 $config['max_width']  = '102400';
+    	   			 $config['max_height']  = '76800';
+    	   			 $config['overwrite'] = TRUE;
+    	   			 $this->load->library('upload', $config);
+					 $this->upload->initialize($config);
+
+				     $useravatar = 'useravatar';
+        	   		
+        	   		 if (!$this->upload->do_upload($useravatar)) {
+			               $error = array('error' => $this->upload->display_errors());
+			           	   $data['success'] = FALSE;
+			               $data['message'] = $this->upload->display_errors();
+			               $this->load->view('patient/header', $data);
+			               $this->load->view('patient/account', $data);
+			               $this->load->view('patient/footer', $data);
+			               return FALSE;
+			         } else {
+			            $this->user_model->update_user_avatar($user_id);
+			        }	   
+        	   }
+        	   $value =  $this->patient_model->update_account_details($user_id);
+        	   if($value == TRUE){
+        	   		$data['success'] = TRUE;
+        			$data['message'] =  'Updated account details successfully';
+        	   } else {
+        	   		$data['success'] = FALSE;
+        			$data['message'] =  'Failed to update details'. $value;
+        	   }
+	   	}
+
+	   	$this->load->view('patient/header', $data);
+	   	$this->load->view('patient/account', $data);
+	   	$this->load->view('patient/footer', $data);
+				
+	}
 	public function my_appointments()
 	{
 		$this->load->library('session');
@@ -105,7 +164,8 @@ class Patient extends CI_Controller {
 		if(isset($data['user_session']['logged_in']) && $data['user_session']['logged_in'] == 'TRUE'){
 			$user_id = $data['user_session']['user_meta']['0']['id'];
 			$data['user_profile'] = $this->user_model->get_user_profile($user_id);
-			$data['doctor_results'] = $this->patient_model->search_doctor();
+			$search_input = $this->input->post("search_input");
+            $data['doctor_results'] = $this->patient_model->search_doctor($search_input);
 			
 			$this->load->helper(array('form', 'url'));
 			$this->load->view('patient/header', $data);

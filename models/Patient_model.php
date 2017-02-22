@@ -13,40 +13,7 @@ class Patient_model extends CI_Model {
             return $query->result_array();
         }
         
-        public function add_patient($data) {
-            $password = $data['password'];
-            $useremail = $data['email'];
-            $usertype = 'patient';
-
-            // patient details 
-
-            $fullname = $data['fullname'];
-            $phone = $data['phone'];
-            $town = $data['town'];
-            $country = $data['country'];
-            $address = $data['address'];
-            
-            
-         
-            $this->db->db_debug = FALSE;
-            $sql = "INSERT INTO user (email, password, user_type) " .
-            " VALUES (" .$this->db->escape($useremail) .",".$this->db->escape(md5($password)) .",".$this->db->escape($usertype) .")";
-                   
-                    if(!$this->db->query($sql)) {
-                        return $this->db->error(); 
-                    } else {
-                        $fquery = $this->db->query("select * from user where email = '".$useremail ."'");
-                        
-                        foreach ($fquery->result() as $row)
-                            {
-                            $queryid = $row->id;
-                            }
-                        $query = "INSERT INTO patient_table (user_id,fullname,town,country,postal_address,phone)" .
-                        "VALUES (" . $this->db->escape($queryid).",".$this->db->escape($fullname).",".$this->db->escape($town).",".$this->db->escape($country).",".$this->db->escape($address).",".$this->db->escape($phone).")";
-                         $this->db->query($query);
-                        return $queryid;
-                    }
-        }
+        
         
         public function update_patient($data) {
             $password = $data['password'];

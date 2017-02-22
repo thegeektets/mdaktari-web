@@ -121,9 +121,9 @@ class Doctor extends CI_Controller {
         	   		 
         	   		 $config['upload_path'] = './assets/uploads/';
     	   			 $config['allowed_types'] = 'gif|jpg|png';
-    	   			 $config['max_size'] = '10000';
-    	   			 $config['max_width']  = '10240';
-    	   			 $config['max_height']  = '7680';
+    	   			 $config['max_size'] = '100000';
+    	   			 $config['max_width']  = '102400';
+    	   			 $config['max_height']  = '76800';
     	   			 $config['overwrite'] = TRUE;
     	   			 $this->load->library('upload', $config);
 					 $this->upload->initialize($config);

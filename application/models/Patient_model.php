@@ -8,12 +8,8 @@ class Patient_model extends CI_Model {
                 $this->load->database(); 
         }
 
-        public function search_doctor() {
-            $search_input = $this->input->post("search_input");
-            if($search_input == ''){
-                $query = $this->db->query("select * from user, doctor_table where user.id = doctor_table.user_id");
-                return $query-> result_array();
-            } else {
+        public function search_doctor($search_input) {
+            
                 $query1 = $this->db->query('select * from user, doctor_table where user.id = doctor_table.user_id AND fullname LIKE "%'.$search_input.'%"');
                 $result1 =  $query1-> result_array();
 
@@ -26,91 +22,73 @@ class Patient_model extends CI_Model {
                 $query4 = $this->db->query('select * from user, doctor_table where user.id = doctor_table.user_id AND country LIKE "%'.$search_input.'%"');
                 $result4 =  $query4-> result_array();
                 return array_merge($result1,$result2,$result3,$result4);
-            }
-
-            
+       
         }
         public function get_all_patients() {
             $query = $this->db->query("select * from user, patient_table where user.id = patient_table.user_id AND user.user_type = 'patient'");
             return $query->result_array();
         }
         
-        public function add_patient($data) {
-            $password = $data['password'];
-            $useremail = $data['email'];
-            $usertype = 'patient';
-
-            // patient details 
-
-            $fullname = $data['fullname'];
-            $phone = $data['phone'];
-            $town = $data['town'];
-            $country = $data['country'];
-            $address = $data['address'];
-            
-            
-         
-            $this->db->db_debug = FALSE;
-            $sql = "INSERT INTO user (email, password, user_type) " .
-            " VALUES (" .$this->db->escape($useremail) .",".$this->db->escape(md5($password)) .",".$this->db->escape($usertype) .")";
-                   
-                    if(!$this->db->query($sql)) {
-                        return $this->db->error(); 
-                    } else {
-                        $fquery = $this->db->query("select * from user where email = '".$useremail ."'");
-                        
-                        foreach ($fquery->result() as $row)
-                            {
-                            $queryid = $row->id;
-                            }
-                        $query = "INSERT INTO patient_table (user_id,fullname,town,country,postal_address,phone)" .
-                        "VALUES (" . $this->db->escape($queryid).",".$this->db->escape($fullname).",".$this->db->escape($town).",".$this->db->escape($country).",".$this->db->escape($address).",".$this->db->escape($phone).")";
-                         $this->db->query($query);
-                        return $queryid;
-                    }
-        }
         
         public function update_patient($data) {
-            $password = $data['password'];
-            $useremail = $data['email'];
-            $usertype = 'patient';
+            // patient details 
 
-            // doctor details 
-
+            $id = $data['id'];
             $fullname = $data['fullname'];
             $phone = $data['phone'];
             $town = $data['town'];
             $country = $data['country'];
             $address = $data['address'];
-            $id = $data['id'];
+            $occupation = $data['occupation'];
+            $gender = $data['gender'];
+            $dob = $data['dob'];
+            $email = $data['email'];
             
-                            
             $this->db->db_debug = FALSE;
-                    $sql = "UPDATE user SET 
-                    email = ".$this->db->escape($useremail).", 
-                    password = ".$this->db->escape(md5($password))." WHERE id = ".$id;
-
-                    if(!$this->db->query($sql)) {
-                        return $this->db->error(); 
-                    } else {
-                        $fquery = $this->db->query("select * from user where email = '".$useremail ."'");
-                        
-                        foreach ($fquery->result() as $row)
-                            {
-                            $queryid = $row->id;
-                            }
-                        $query = "UPDATE patient_table SET 
-                        fullname = '".$this->db->escape($fullname)."', 
-                        town = '".$this->db->escape($town)."',
-                        country = '".$this->db->escape($country)."', 
-                        address = '".$this->db->escape($address)."', 
-                        phone = '".$this->db->escape($phone)."',                         
-                        country = '".$this->db->escape($country)."' WHERE user_id = ".$id;    
-                         $this->db->query($query);
-                        return $queryid;
-                    }
+            $query = "
+                UPDATE patient_table SET 
+                        fullname = ".$this->db->escape($fullname).", 
+                        town = ".$this->db->escape($town).", 
+                        country = ".$this->db->escape($country).", 
+                        phone = ".$this->db->escape($phone).", 
+                        postal_address = ".$this->db->escape($address).",
+                        occupation = ".$this->db->escape($occupation).", 
+                        sex = ".$this->db->escape($gender).", 
+                        country = ".$this->db->escape($country).", 
+                        dob = ".$this->db->escape($dob)." WHERE user_id = ".$id."";
+                return $this->db->query($query);
         }
 
+        public function update_account_details($patient_id) {
+        
+            // patient details 
+
+            $fullname = $this->input->post('patient_fullname');
+            $phone = $this->input->post('patient_phone');
+            $town = $this->input->post('patient_town');
+            $country = $this->input->post('patient_country');
+            $address = $this->input->post('patient_address');
+            $occupation = $this->input->post('patient_occupation');
+            $gender = $this->input->post('patient_gender');
+            $dob = $this->input->post('patient_dob');
+            $email = $this->input->post('patient_email');
+        
+            $this->db->db_debug = FALSE;
+            $query = "
+                UPDATE patient_table SET 
+                        fullname = ".$this->db->escape($fullname).", 
+                        town = ".$this->db->escape($town).", 
+                        country = ".$this->db->escape($country).", 
+                        phone = ".$this->db->escape($phone).", 
+                        postal_address = ".$this->db->escape($address).",
+                        occupation = ".$this->db->escape($occupation).", 
+                        sex = ".$this->db->escape($gender).", 
+                        country = ".$this->db->escape($country).", 
+                        dob = ".$this->db->escape($dob)." WHERE user_id = ".$patient_id."";
+            $this->db->query($query); 
+            //echo $query;
+            return TRUE;
+        }
         public function delete_patient($id) {
             $this->db->query(" DELETE FROM patient_table WHERE user_id = ".$this->db->escape($id)."");
             $this->db->query(" DELETE FROM user WHERE id = ".$this->db->escape($id)."");

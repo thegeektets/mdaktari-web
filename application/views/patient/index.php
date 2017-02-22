@@ -23,8 +23,12 @@
          <div class="large-2 columns">
          </div>
          <div class="large-3 columns my_pimabima_item">
-              <img src="<?php echo base_url('/assets/img/avatar.png')?>" class="avatar_img">
-              <div>  <?php echo $user_profile['0']['fullname']; ?> </div>
+              <img src="<?php if (isset($user_profile)) { 
+                    echo $user_profile['0']['user_avatar'];
+                  } ?>" class="avatar_img">
+              <div> <?php if (isset($user_profile)) { 
+                    echo $user_profile['0']['fullname'];
+                  } ?> </div>
          </div>
          <div class="large-2 columns my_pimabima_item">
               <div class="mypb_item_title"> APPOINTMENT HISTORY </div>
@@ -67,7 +71,7 @@
           </form>  
           </p>
           <div class="points_desc">
-             find a doctor by searching a condition,symptom , doctor name or locatin and make an appointment instantly.
+             find a doctor by searching a speciality , doctor name or location and make an appointment instantly.
           </div>
           
         </div>

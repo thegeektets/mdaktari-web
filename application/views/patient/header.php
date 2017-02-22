@@ -33,12 +33,15 @@
         </div>
           <div class="top-bar-right">
             <div class="user_details">
-                <img src="<?php echo base_url('/assets/img/avatar.png')?>" class="user_avatar">
+                <img src="<?php if (strlen($user_profile['0']['user_avatar']) > 0) {
+                    echo $user_profile['0']['user_avatar'];
+                  } else { echo base_url('/assets/img/avatar.png'); } ?>" class="user_avatar">
                 <div class="user_name"> 
                   <?php if (isset($user_profile)) {
                     echo $user_profile['0']['fullname'];
                   } ?>
                 </div>
+
                 <div class="user_points"> <a href="<?php echo base_url('index.php/registration/logout');?>"> Logout </div>
               
             </div>
