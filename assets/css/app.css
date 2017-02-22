@@ -93,6 +93,10 @@ body {
   float: left;
 }
 
+.user_points a {
+  color: #fff;
+}
+
 /* colors and backgrounds */
 
 .info_bg {
@@ -156,8 +160,9 @@ body {
   color: #38b451;
   background-color: #fff;
   border: 1px solid #38b451;
-  position: absolute;
   top: calc(180px);
+  float: right;
+  text-transform: uppercase;
 }
 .button_edit:hover , .button_edit:focus {
   text-align: center;
@@ -388,21 +393,23 @@ body {
   font-family: 'Gotham'; 
   font-weight: 400;
   color: #333;
-   
+  text-align: justify; 
 }
 
 /*popup modal */
 
 .edit_details_modal {
-  position: fixed;
-  z-index: 1;
-  top:150px;
-  left: 25%;
-  width: 50%;
-  margin:0 auto;
-  border:3px solid rgb(24, 41, 51);;
-  background: #fff;
-  padding: 10px;
+    position: fixed;
+    z-index: 1;
+    top: 20px;
+    left: 15%;
+    width: 70%;
+    margin: 0 auto;
+    border: 3px solid rgb(24, 41, 51);
+    background: #fff;
+    padding: 10px;
+    overflow: scroll;
+    height: 100%;
 }
 
 .modal_header {
@@ -422,7 +429,6 @@ body {
 .modal_body > form > .form_group{
   margin-left: 10px;
   margin-top:10px;
-  border: 1px solid #C1C1C1;
   padding: 5px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -516,7 +522,7 @@ img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
 }
 .product_tab_content {
   border: none;
-  margin-top: 25px;
+  margin-top: 5px;
   text-align: left;
 }
 .insuarance_item {
@@ -559,11 +565,14 @@ img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
   font-family: 'Gotham'; 
 }
 .doctor_avatar {
-  padding: 10px;
+  padding: 10px; 
   margin-right: 0px;
   margin-top: -15px;
+  width: 170px;
+  margin-left: 35px;
 }
 .doctor_avatar_img {
+   height: 135px;
    float: right;
    margin-top: 1em;
    margin-right: 1em;
@@ -620,7 +629,7 @@ img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
   font-size:32px;
 }
 .appointment_form {
-  border: 1px #333 solid;
+  /* border: 1px #333 solid; */
 }
 .appointment_title {
   background: #182933;
@@ -733,4 +742,36 @@ img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
 }
 .copyright {
   font-size:14px;
+}
+
+
+/* custom styles */
+
+.session_div {
+    padding-top: 35px;
+    padding-bottom: 7px;
+}
+
+.availability_div {
+    padding-top: 38px;
+    padding-bottom: 2px;
+} 
+
+.schedule_title {
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  font-weight: 400;
+  font-family: 'Gotham';
+}
+.schedule_link {
+    text-align: right;
+    padding: 5px;
+}
+.schedule_link a {
+  font-size: 18px;
+  color: #fff;
+}
+.pull-left{
+  float: left !important;
 }

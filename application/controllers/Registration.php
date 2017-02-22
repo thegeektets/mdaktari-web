@@ -26,6 +26,28 @@ class Registration extends CI_Controller {
 		$this->load->view('registration/forgot');
 		$this->load->view('registration/footer');
 	}
+
+	public function forgot_password() {
+      $data['success']=("") ;
+  	  $this->load->helper(array('form', 'url'));
+	  $user_meta = $this->user_model-> get_user_meta();
+	  
+	  if(sizeof($user_meta)> 0){
+	  		$this->send_reset_email();
+	  		$data['success'] = TRUE;
+	  	    $data['message'] =  'A recovery email has been sent to your email';
+	  		$this->load->view('registration/header', $data);
+	  		$this->load->view('registration/forgot',$data);
+	  		$this->load->view('registration/footer');   
+	  } else {
+	  	   $data['success'] = FALSE;
+	 	   $data['message'] =  'email does not exist please check and try again';
+	 	   $this->load->view('registration/header', $data);
+	       $this->load->view('registration/forgot',$data);
+	       $this->load->view('registration/footer');   
+	  }
+   	}
+
 	public function patient_registration() {
 		$this->load->library('session');
 		$this->load->helper(array('form', 'url'));
@@ -100,7 +122,8 @@ class Registration extends CI_Controller {
     $this->load->library('form_validation');
     $this->form_validation->set_rules('doctor_fullname', 'doctor_fullname ', 'required'); 
     $this->form_validation->set_rules('doctor_email', 'doctor_email ', 'required|valid_email'); 
-    $this->form_validation->set_rules('doctor_phone', 'doctor_phone ', 'required'); 
+    $this->form_validation->set_rules('doctor_phone', 'doctor_phone ', 'required');
+    $this->form_validation->set_rules('doctor_speciality', 'doctor_speciality ', 'required');
     $this->form_validation->set_rules('doctor_town', 'doctor_town ', 'required'); 
     $this->form_validation->set_rules('doctor_country', 'doctor_country ', 'required'); 
     $this->form_validation->set_rules('doctor_address', 'doctor_address ', 'required'); 
@@ -129,7 +152,7 @@ class Registration extends CI_Controller {
 					  $data['message'] = 	'Registration Successfull <br/>
 											 Failed to send email <br/>';
 					}
-					$this->load->view('registration/doctor_reg' , $data);
+					$this->load->view('registration/index' , $data);
 				} else {
     				$data['success'] = FALSE;
     				$data['message'] = $value['message'];
@@ -164,8 +187,9 @@ class Registration extends CI_Controller {
 	       $this->load->view('registration/footer');   
 	     
 	    } else {
-	       $user_pass = $this->user_model->get_user_pass();
-	       $user_meta = $this->user_model-> get_user_meta();
+	       $email = $this->input->post("login_email");	
+	       $user_pass = $this->user_model->get_user_pass($email);
+	       $user_meta = $this->user_model-> get_user_meta($email);
 	   
 	          if(md5($this->input->post("login_password")) === $user_pass) {
 			       	
@@ -193,8 +217,6 @@ class Registration extends CI_Controller {
 		$this->load->library('session');
 		$user_session = $this->session->all_userdata();
 
-		var_dump($user_session['logged_in']);
-		
 		if( isset($user_session) && ($user_session['logged_in'] === FALSE )) {
 		
 			   $data['success'] = FALSE;
@@ -244,9 +266,9 @@ class Registration extends CI_Controller {
 	    $this->load->library('email');
 		 $config['useragent'] = 'CodeIgniter';
 		 $config['mailpath']  = "/usr/bin/sendmail";
-		 $config['protocol'] = ""; 
-		 $config['smtp_host'] = ""; 
-		 $config['smtp_port'] = ""; 
+		 $config['protocol'] = "smtp"; 
+		 $config['smtp_host'] = "ssl://smtp.googlemail.com"; 
+		 $config['smtp_port'] = "465"; 
 		 $config['smtp_user'] = "suraimagesbackend@gmail.com"; 
 		 $config['smtp_pass'] = "Sura@Images"; 
 		 $config['smtp_timeout'] = 5;
@@ -262,6 +284,20 @@ class Registration extends CI_Controller {
 		 $config['bcc_batch_size'] = 200;
 	     $this->email->initialize($config);
 	 } 
+	public function send_reset_email(){
+	     $email = $this->input->post("login_email");
+	     $password = $this->generate_random_password();
+	     $this->user_model->update_user_password($password);
+
+	     $this->initializemail();
+	     $this->load->helper('url');
+	     $this->load->library('email');
+	     $this->email->from('support@mdaktari.com', 'mDaktari Support');
+	     $this->email->to($email); 
+	     $this->email->subject('mDaktari Password');
+	     $this->email->message('Your Password has been reset to '. $password ); 
+	     $this->email->send();
+	 }
 
 	public function send_welcome_email($email , $username) {
 		 $code = $this->generate_random_password();
@@ -305,7 +341,7 @@ class Registration extends CI_Controller {
         $data['success']= 'TRUE';
         $data['message'] = 	'you have been logged out successfully';
 		$this->load->view('registration/header', $data);
-		$this->load->view('registration/login' , $data);
+		$this->load->view('registration/index' , $data);
 		$this->load->view('registration/footer');
 	}
 	

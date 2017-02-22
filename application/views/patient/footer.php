@@ -1,3 +1,4 @@
+</div>
   <footer class="footer_bar">
       <div class="row">
         <div class="large-3 columns">
@@ -44,6 +45,62 @@
     <script src="<?php echo base_url('/assets/js/vendor/jquery.js')?>"></script>
     <script src="<?php echo base_url('/assets/js/vendor/what-input.js')?>"></script>
     <script src="<?php echo base_url('/assets/js/vendor/foundation.js')?>"></script>
-    <script src="<?php echo base_url('/assets/js/app.js')?>"></script>    
+    <script src="<?php echo base_url('/assets/js/app.js')?>"></script>
+        <script type="text/javascript">
+        $('.appointment_date').change(function (){
+
+               var date = $(this).val();
+
+               console.log('appointment date ' + date);
+
+                $.ajax({
+                 type: 'post',
+                 url: '<?php echo base_url("/index.php/calendar/check_availability/".$doctor_profile[0]["user_id"]);?>/'+date,
+                 data: date, 
+                 dataType: 'json',
+                 success: 
+                   function(data) {
+                     console.log(data);
+                      if(data == 0){
+                          $('.appointment_time').prop('disabled', true);
+                          $('.appointment_message').hide();
+                          $('.appointment_message').attr("class" ,"appointment_message alert-box warning");
+                          $('.appointment_message').text("Doctor is UnAvailable on Selected Date!"); 
+                          $('.appointment_message').append('<a href="#"" class="close" id="close">&times;</a>');
+                          $('.appointment_message').show();
+                          setTimeout("$('.appointment_message').hide();" , 3000);
+                      } else {
+                          $('.appointment_time').empty();
+                          $('.appointment_time').append('<option>Select the Appintment Time </option');
+                          $('.appointment_time').prop('disabled', false);
+                          var times  = data;
+                          var time = [];
+                          try {
+                            var t = 0;
+                            for(var i in times ){
+                                time[t] = times[i];
+                                t++;
+                            } 
+                            times = time;
+                          } finally {
+                              //do nothing here
+                          }
+                          console.log(times.length);
+                          for(var t = 0 ; t < times.length; t++){
+                            $('.appointment_time').append('<option value="'+times[t]+'">'+times[t]+'</option');
+                          }
+                      }
+                      
+                   },
+                 fail: 
+                   function(data) {
+                      console.log(data);
+                   }
+                });
+                         
+                return false; 
+        });
+ 
+    </script>    
   </body>
 </html>

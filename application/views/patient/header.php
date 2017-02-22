@@ -1,3 +1,4 @@
+<?php //error_reporting(0); ?>
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
   <head>
@@ -9,7 +10,8 @@
     <link rel="stylesheet" href="<?php echo base_url('/assets/css/app.css')?>">
     <link rel="stylesheet" href="<?php echo base_url('/ssets/css/responsive.css')?>">
     <link rel="stylesheet" href="<?php echo base_url('/assets/css/font.css')?>">
-    <script src="https://use.fontawesome.com/e4e812a2f7.js"></script>
+    <script src="https://use.fontawesome.com/8d5a1b086d.js"></script>
+
 
   </head>
   <body>
@@ -23,7 +25,8 @@
       <div class="row">  
         <div class="top-bar-left">
           <div class="logo">
-            <img src="<?php echo base_url('/assets/img/mdaktari_logo.png')?>">
+          <a href="<?php echo base_url();?>">
+              <img src="<?php echo base_url('/assets/img/mdaktari_logo.png')?>">
           </div>
           
 
@@ -31,7 +34,11 @@
           <div class="top-bar-right">
             <div class="user_details">
                 <img src="<?php echo base_url('/assets/img/avatar.png')?>" class="user_avatar">
-                <div class="user_name"> Griffin Muteti </div>
+                <div class="user_name"> 
+                  <?php if (isset($user_profile)) {
+                    echo $user_profile['0']['fullname'];
+                  } ?>
+                </div>
                 <div class="user_points"> <a href="<?php echo base_url('index.php/registration/logout');?>"> Logout </div>
               
             </div>

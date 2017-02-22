@@ -8,48 +8,6 @@ class User_model extends CI_Model {
                 $this->load->database(); 
         }
 
-        public function create_facebook_user($profile) {
-            $user_profile = $profile;
-            $username = $user_profile['displayName'];
-            $useremail = $user_profile['email'];
-            $fname = $user_profile['firstName'];
-            $mname = $user_profile['lastName'];
-            $country = $user_profile['country'];
-            $city = $user_profile['city'];
-            $phone = $user_profile['phone'];
-            $address = $user_profile['address'];
-            $zip = $user_profile['zip'];
-            $avatar = $user_profile['photoURL'];
-            $password = '';
-
-            $cquery = $this->db->query("select * from users where email = '".$useremail ."'");
-                        foreach ($cquery->result() as $row)
-                            {
-                            $result = $row->id;
-                            }
-            
-            if(isset($result)){
-                // user exists do nothing;
-            } else {
-                $sql = "INSERT INTO users (username,email,password,avatar) " .
-                "VALUES (" . $this->db->escape($username) . ",".$this->db->escape($useremail) .",".$this->db->escape(md5($password)).",".$this->db->escape($avatar) .")";
-                        if(!$this->db->query($sql)) {
-                            return $this->db->error(); 
-                        } else {
-                            $fquery = $this->db->query("select * from users where email = '".$useremail ."'");
-                            foreach ($fquery->result() as $row)
-                                {
-                                $queryid = $row->id;
-                                }
-                            $query = "INSERT INTO user_details (firstname,middlename,postaladdress,zipcode,city,country,telnumber,email,user_id) " .
-                            "VALUES (".$this->db->escape($fname).",".$this->db->escape($mname).",".$this->db->escape($address).",".$this->db->escape($zip).",".$this->db->escape($city).",".$this->db->escape($country).",".$this->db->escape($phone).",".$this->db->escape($useremail).",". $this->db->escape($queryid).")";
-                             $this->db->query($query);
-                            return TRUE;
-                        }     
-            }
-           
-        }
-
         public function insert_new_patient() {
             $password = $this->input->post("patient_password");
             $useremail = $this->input->post("patient_email");
@@ -75,7 +33,7 @@ class User_model extends CI_Model {
                         
                         foreach ($fquery->result() as $row)
                             {
-                            $queryid = $row->user_id;
+                            $queryid = $row->id;
                             }
                         $query = "INSERT INTO patient_table (user_id,fullname,town,country,postal_address,phone)" .
                         "VALUES (" . $this->db->escape($queryid).",".$this->db->escape($fullname).",".$this->db->escape($town).",".$this->db->escape($country).",".$this->db->escape($address).",".$this->db->escape($phone).")";
@@ -83,9 +41,43 @@ class User_model extends CI_Model {
                         return TRUE;
                     }
         }
+        public function insert_new_doctor() {
+            $password = $this->input->post("doctor_password");
+            $useremail = $this->input->post("doctor_email");
+            $usertype = 'doctor';
+
+            // doctor details 
+
+            $fullname = $this->input->post('doctor_fullname');
+            $phone = $this->input->post('doctor_phone');
+            $town = $this->input->post('doctor_town');
+            $country = $this->input->post('doctor_country');
+            $address = $this->input->post('doctor_address');
+            $speciality = $this->input->post('doctor_speciality');
+            
+         
+            $this->db->db_debug = FALSE;
+            $sql = "INSERT INTO user (email, password, user_type) " .
+            " VALUES (" .$this->db->escape($useremail) .",".$this->db->escape(md5($password)) .",".$this->db->escape($usertype) .")";
+                   
+                    if(!$this->db->query($sql)) {
+                        return $this->db->error(); 
+                    } else {
+                        $fquery = $this->db->query("select * from user where email = '".$useremail ."'");
+                        
+                        foreach ($fquery->result() as $row)
+                            {
+                            $queryid = $row->id;
+                            }
+                        $query = "INSERT INTO doctor_table (user_id,fullname,town,country,postal_address,phone,speciality)" .
+                        "VALUES (" . $this->db->escape($queryid).",".$this->db->escape($fullname).",".$this->db->escape($town).",".$this->db->escape($country).",".$this->db->escape($address).",".$this->db->escape($phone).",".$this->db->escape($speciality).")";
+                         $this->db->query($query);
+                        return TRUE;
+                    }
+        }
         public function update_user_password($password) {
-            $useremail = $this->input->post('txt_email');
-            $sql = "UPDATE users SET password = ".
+            $useremail = $this->input->post('login_email');
+            $sql = "UPDATE user SET password = ".
              $this->db->escape(md5($password)) ." WHERE email = ".$this->db->escape($useremail);
              $this->db->query($sql);        
         }
@@ -113,7 +105,7 @@ class User_model extends CI_Model {
             $ppic =   $upload_data['file_name'];
             $pic = base_url("assets/uploads/".$ppic); 
             $query = 
-            $this->db->query(" UPDATE user SET avatar = ".$this->db->escape($pic)." WHERE id = ".$this->db->escape($id));
+            $this->db->query(" UPDATE user SET user_avatar = ".$this->db->escape($pic)." WHERE id = ".$this->db->escape($id));
         }
         public function change_user_password($id) {
             $password = $this->input->post('txt_npassword');
@@ -157,8 +149,7 @@ class User_model extends CI_Model {
             $query = $this->db->query("select * from user");
             return $query->result_array();
         }
-        public function get_user_pass() {
-                $email = $this->input->post("login_email");
+        public function get_user_pass($email) {
                 $query = $this->db->query("select * from user where email = '".$email ."'");
                 foreach ($query->result() as $row)
                     {
@@ -182,19 +173,27 @@ class User_model extends CI_Model {
                 $query = $this->db->query("select * from user where email = '".$email ."'");
                    return $query->result_array();
         }
-        public function get_user_meta() {
-                $email = $this->input->post("login_email");
+        public function get_user_meta($email) {
                 $query = $this->db->query("select * from user where email = '".$email ."'");
                    return $query->result_array();
         }
-        public function get_user_details($id) {
-                $query = $this->db->query("select * from user_details,user where users.id = user_details.user_id AND users.email = '".$id ."'");
-                   return $query->result_array();
+        public function get_user_profile($id) {
+                $query = $this->db->query('select * from user WHERE user.id = "'.$id.'"');
+                foreach ($query->result() as $row) {
+                    $user_type = $row->user_type;
+                }
+                
+                if ($user_type == 'patient') {
+                
+                    $result = $this->db->query('select * from user, patient_table where user.id = patient_table.user_id and user.id = '.$id);
+                    return $result -> result_array();
+                
+                } else if ($user_type == 'doctor'){
+                    $result = $this->db->query('select * from user, doctor_table where user.id = doctor_table.user_id and user.id ='.$id);
+                    return $result -> result_array();
+                }
         }
-        public function get_payment_details($id) {
-                $query = $this->db->query("select * from user_payment_details,users where users.id = user_payment_details.user_id AND users.email = '".$id ."'");
-                   return $query->result_array();
-        }
+        
         public function update_account_details($id){
                 $fname = $this->input->post("txt_fname");
                 $email = $this->input->post("txt_email");
@@ -227,39 +226,8 @@ class User_model extends CI_Model {
                      $this->db->escape($status) ." WHERE user_id = ".$this->db->escape($id);
                      $this->db->query($sql);                     
         }
-        public function update_edit_status($id , $status){
-                $user_id = $id;
-                $sql = "UPDATE user_details SET edit_status = ".
-                     $this->db->escape($status) ." WHERE user_id = ".$this->db->escape($id);
-                     $this->db->query($sql);                     
-        }
-        public function update_video_upload_status($id , $status){
-                $user_id = $id;
-                $sql = "UPDATE user_details SET video_upload_status = ".
-                     $this->db->escape($status) ." WHERE user_id = ".$this->db->escape($id);
-                     $this->db->query($sql);                     
-        }
-        public function update_video_edit_status($id , $status){
-                $user_id = $id;
-                $sql = "UPDATE user_details SET video_edit_status = ".
-                     $this->db->escape($status) ." WHERE user_id = ".$this->db->escape($id);
-                     $this->db->query($sql);                     
-        }
-        public function update_payment_details($id){
-                $payment_mode = $this->input->post("slc_payment");
-                $bank_name = $this->input->post("bank_name");
-                $account_name = $this->input->post("account_name");
-                $account_number = $this->input->post("account_number");
-                $branch_name = $this->input->post("branch_name");
-                $mobile_number = $this->input->post("mobile_number");
-                $email_address = $this->input->post("email_address");
-                $user_id = $id;
-
-                $query = $this->db->query("     
-                REPLACE INTO user_payment_details (payment_mode, bank_name, account_name, account_number, branch_name, mobile_number, email_address, user_id)
-                VALUES(".$this->db->escape($payment_mode).",".$this->db->escape($bank_name).",".$this->db->escape($account_name).",".$this->db->escape($account_number).",".$this->db->escape($branch_name).",".$this->db->escape($mobile_number).",".$this->db->escape($email_address).",".$this->db->escape($user_id).")");
-                      
-        }
+        
+      
 }
 
 ?>

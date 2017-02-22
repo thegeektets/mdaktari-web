@@ -74,22 +74,13 @@
     <h1> API Lists </h1>
 
     <div id="body">
-
-    
-
         <ol>
+            <li><a href="<?php echo site_url('api/rest/authetication/griffin@tunaweza.com/griffin'); ?>">Authetication</a> - pass email and password e.g(http://localhost/mdaktari-web/index.php/api/rest/authetication/griffin@tunaweza.com/griffin) </li>
+            <li><a href="<?php echo site_url('api/rest/profile/1'); ?>">User Profile </a> - pass user_id e.g(http://localhost/mdaktari-web/index.php/api/rest/profile/1) </li>
             <li><a href="<?php echo site_url('api/rest/users'); ?>">Users</a> - defaulting to JSON</li>
-            <li><a href="<?php echo site_url('api/rest/users/format/csv'); ?>">Users</a> - get it in CSV</li>
-            <li><a href="<?php echo site_url('api/rest/users/id/1'); ?>">User #1</a> - defaulting to JSON  (users/id/1)</li>
-            <li><a href="<?php echo site_url('api/rest/users/1'); ?>">User #1</a> - defaulting to JSON  (users/1)</li>
-            <li><a href="<?php echo site_url('api/rest/users/id/1.xml'); ?>">User #1</a> - get it in XML (users/id/1.xml)</li>
-            <li><a href="<?php echo site_url('api/rest/users/id/1/format/xml'); ?>">User #1</a> - get it in XML (users/id/1/format/xml)</li>
-            <li><a href="<?php echo site_url('api/rest/users/id/1?format=xml'); ?>">User #1</a> - get it in XML (users/id/1?format=xml)</li>
-            <li><a href="<?php echo site_url('api/rest/users/1.xml'); ?>">User #1</a> - get it in XML (users/1.xml)</li>
             <li><a id="ajax" href="<?php echo site_url('api/rest/users/format/json'); ?>">Users</a> - get it in JSON (AJAX request)</li>
-            <li><a href="<?php echo site_url('api/rest/users.html'); ?>">Users</a> - get it in HTML (users.html)</li>
-            <li><a href="<?php echo site_url('api/rest/users/format/html'); ?>">Users</a> - get it in HTML (users/format/html)</li>
-            <li><a href="<?php echo site_url('api/rest/users?format=html'); ?>">Users</a> - get it in HTML (users?format=html)</li>
+            <li><a id="ajax" href="<?php echo site_url('api/rest/patients/format/json'); ?>">Patients </a> (GET , POST , PUT , DELETE) </li>
+            <li><a id="ajax" href="<?php echo site_url('api/rest/doctors'); ?>"> Doctors </a> (GET , POST , PUT , DELETE)</li>
         </ol>
 
     </div>
