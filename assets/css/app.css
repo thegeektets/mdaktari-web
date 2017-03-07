@@ -153,6 +153,7 @@ body {
   width: 100%;
   font-size: 12px;
 }
+<<<<<<< HEAD
 .button_cancel {
   background: #fff;
   color: #ff0000;
@@ -171,6 +172,8 @@ body {
   font-size: 12px;
 }
 
+=======
+>>>>>>> 1db99937cfa4211d6d9ce5399ea6cba18ed50fdd
 .button_edit {
   text-align: center;
   margin-top: 5px;
@@ -558,6 +561,7 @@ img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
   text-transform: uppercase;
   padding:10px;
 }
+<<<<<<< HEAD
 
 /* Appointments */
 
@@ -622,6 +626,18 @@ img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
   font-size: 12px;
   text-transform: uppercase;
   padding:10px;
+=======
+.appintment_desc {
+  display: inline-block;
+}
+.appointment_desc > h6 {
+  text-transform:uppercase;
+  font-size:14px;
+}
+.appointment_desc  > p {
+  text-transform: none;
+  font-size: 13px;
+>>>>>>> 1db99937cfa4211d6d9ce5399ea6cba18ed50fdd
 }
 .insuarance_cost {
   font-weight:700;

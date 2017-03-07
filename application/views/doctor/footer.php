@@ -68,6 +68,7 @@
                           $('.appointment_message').append('<a href="#"" class="close" id="close">&times;</a>');
                           $('.appointment_message').show();
                           setTimeout("$('.appointment_message').hide();" , 3000);
+<<<<<<< HEAD
                       } else if (data == 3){
                           $('.appointment_time').prop('disabled', true);
                           $('.appointment_message').hide();
@@ -76,6 +77,8 @@
                           $('.appointment_message').append('<a href="#"" class="close" id="close">&times;</a>');
                           $('.appointment_message').show();
                           setTimeout("$('.appointment_message').hide();" , 3000);
+=======
+>>>>>>> 1db99937cfa4211d6d9ce5399ea6cba18ed50fdd
                       } else {
                           $('.appointment_time').empty();
                           $('.appointment_time').append('<option>Select the Appintment Time </option');

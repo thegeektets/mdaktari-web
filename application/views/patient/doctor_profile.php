@@ -169,10 +169,14 @@
                             </div>';
                   }
                ?>
+<<<<<<< HEAD
             <div class="message">
             </div>
             <form class="appointment_form" name="new_appointment" id="new_appointment"
             onsubmit="return book_appointment()">
+=======
+            <form class="appointment_form" name="new_appointment" id="new_appointment" <?php echo form_open('patient/post_new_appointment/'.$doctor_profile[0]['user_id']); ?>
+>>>>>>> 1db99937cfa4211d6d9ce5399ea6cba18ed50fdd
 
               <div class="appointment_title">
                   Book Appointment
@@ -180,7 +184,10 @@
               <div class="appointment_details">
                 <div class="input-group">
                     <label>Appointment Reason : </label>
+<<<<<<< HEAD
                     <input type="hidden" name="doctor_id" value="<?php echo $doctor_profile[0]['user_id'] ?>">
+=======
+>>>>>>> 1db99937cfa4211d6d9ce5399ea6cba18ed50fdd
                     <textarea type="text" name="appointment_reason" placeholder="Visit Reason" class="primary_color" value="<?php echo set_value('appointment_reason'); ?>">
                         <?php echo set_value('appointment_reason'); ?>
                     </textarea>

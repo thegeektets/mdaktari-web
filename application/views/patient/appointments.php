@@ -19,6 +19,7 @@
       </div>
     </div>
 
+<<<<<<< HEAD
    <div class="insuarance_products">
         <div class="row">
              <?php for($i=0 ; $i < count($user_appointments); $i++){ ?>
@@ -78,6 +79,146 @@
                         </div>
              </div>
              <?php } ?>
+=======
+  
+   <div class="insuarance_products">
+        <div class="row">
+                   <div class="insuarance_item">
+                        <div class = "row">
+                            <div class="large-2 columns">
+                                <img src="assets/img/avatar2.png" class="insuarance_img">
+                                <div class="insuarance_title"> Dr. Faith M Vuku </div>
+                            </div>
+                            <div class="large-4 columns">
+                                 <div class="insuarance_cost">
+                                     <span class="cost_number"> Heart Specialist </span>
+                                 </div>
+                                 <div class="appointment_desc">
+                                    <h6>
+                                    Appointment Reason : 
+                                    </h6>
+                                    <p>
+                                    Lorem ipsum dolor sit amet, quis nusquam no his, novum ceteros eum at. Probo partem sea id, et delenit eligendi conclusionemque usu, qui facilis splendide intellegam ei. Quo in habeo laoreet. Sea omnes verterem constituam in.
+                                    </p>
+                                 </div>
+                            </div>
+                            <div class="large-2 columns">
+                                  <div class="appointment_start">
+                                      JANUARY 5, 2017 9.30 AM
+                                  </div>
+                                  <div class="appointment_end">
+                                      JANUARY 5, 2017 10.30 AM
+                                  </div>
+                            </div>
+                            <div class="large-2 columns">
+                                  <div class="insuarance_processing">
+                                      
+                                  </div>
+                            </div>
+                            <div class="large-2 columns">
+                                  <a class="button button_appointment">
+                                      VIEW
+                                  </a>
+                                  <a class="button button_appointment">
+                                      Reschedule
+                                  </a>
+                                  <a class="button button_appointment">
+                                      Cancel
+                                  </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="insuarance_item">
+                        <div class = "row">
+                            <div class="large-2 columns">
+                                <img src="assets/img/avatar2.png" class="insuarance_img">
+                                <div class="insuarance_title"> Dr. Faith M Vuku </div>
+                            </div>
+                                    <div class="large-4 columns">
+                                 <div class="insuarance_cost">
+                                     <span class="cost_number"> Heart Specialist </span>
+                                 </div>
+                                 <div class="appointment_desc">
+                                    <h6>
+                                    Appointment Reason : 
+                                    </h6>
+                                    <p>
+                                    Lorem ipsum dolor sit amet, quis nusquam no his, novum ceteros eum at. Probo partem sea id, et delenit eligendi conclusionemque usu, qui facilis splendide intellegam ei. Quo in habeo laoreet. Sea omnes verterem constituam in.
+                                    </p>
+                                 </div>
+                            </div>
+                            <div class="large-2 columns">
+                                  <div class="appointment_start">
+                                      JANUARY 5, 2017 9.30 AM
+                                  </div>
+                                  <div class="appointment_end">
+                                      JANUARY 5, 2017 10.30 AM
+                                  </div>
+                            </div>
+                            <div class="large-2 columns">
+                                  <div class="insuarance_processing">
+                                      
+                                  </div>
+                            </div>
+                            <div class="large-2 columns">
+                                  <a class="button button_appointment">
+                                      VIEW
+                                  </a>
+                                  <a class="button button_appointment">
+                                      Reschedule
+                                  </a>
+                                  <a class="button button_appointment">
+                                      Cancel
+                                  </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="insuarance_item">
+                        <div class = "row">
+                            <div class="large-2 columns">
+                                <img src="assets/img/avatar2.png" class="insuarance_img">
+                                <div class="insuarance_title"> Dr. Betty G Kanini </div>
+                            </div>
+                                    <div class="large-4 columns">
+                                 <div class="insuarance_cost">
+                                     <span class="cost_number"> Heart Specialist </span>
+                                 </div>
+                                 <div class="appointment_desc">
+                                    <h6>
+                                    Appointment Reason : 
+                                    </h6>
+                                    <p>
+                                    Lorem ipsum dolor sit amet, quis nusquam no his, novum ceteros eum at. Probo partem sea id, et delenit eligendi conclusionemque usu, qui facilis splendide intellegam ei. Quo in habeo laoreet. Sea omnes verterem constituam in.
+                                    </p>
+                                 </div>
+                            </div>
+                            <div class="large-2 columns">
+                                  <div class="appointment_start">
+                                      JANUARY 5, 2017 9.30 AM
+                                  </div>
+                                  <div class="appointment_end">
+                                      JANUARY 5, 2017 10.30 AM
+                                  </div>
+                            </div>
+                            <div class="large-2 columns">
+                                  <div class="insuarance_processing">
+                                      
+                                  </div>
+                            </div>
+                            <div class="large-2 columns">
+                                  <a class="button button_appointment">
+                                      View
+                                  </a>
+                                  <a class="button button_appointment">
+                                      Reschedule
+                                  </a>
+                                  <a class="button button_appointment">
+                                      Cancel
+                                  </a>
+                            </div>
+                        </div>
+                    </div>
+>>>>>>> 1db99937cfa4211d6d9ce5399ea6cba18ed50fdd
         </div>
         <div style="clear: both"></div>
     </div>
