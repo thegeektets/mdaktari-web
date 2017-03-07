@@ -1,0 +1,29 @@
+@font-face {
+  font-family: 'Barkentina';
+  src: url('../font/barkentina.otf');
+}
+@font-face {
+  font-family: 'Gotham';
+  font-weight: 700;
+  src: url('../font/GOTHAM-BOLD.TTF');
+}
+@font-face {
+  font-family: 'Gotham';
+  font-weight: 500;
+  src: url('../font/GOTHAM-MEDIUM.TTF');
+}
+@font-face {
+  font-family: 'Gotham';
+  font-weight: normal;
+  src: url('../font/GOTHAM-LIGHT.TTF');
+}
+@font-face {
+  font-family: 'Gotham';
+  font-weight: 200;
+  src: url('../font/GOTHAM-THIN.TTF');
+}
+@font-face {
+  font-family: 'Gotham';
+  font-weight: 100;
+  src: url('../font/GOTHAM-XLIGHT.TTF');
+}
