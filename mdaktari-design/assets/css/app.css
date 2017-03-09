@@ -1,0 +1,715 @@
+/*page*/
+
+body {
+  position: relative;
+}
+
+label {
+  color:#fff !important;
+}
+.columns {
+    position: relative;
+    margin-top: 15px;
+}
+
+/* logo */
+
+.logo {
+  display: block;
+  float: left;
+  width: 100px;
+}
+
+/* top-bar menu */
+.top-bar ul li {
+
+}
+.menu-text , .menu-text a {
+  font-weight: 500;
+  font-family: 'Gotham';
+  color: #0CA1C4;
+}
+.top-bar-right {
+ padding: 0.5rem;
+}
+.menu_divider {
+ border-left: 1px solid #fff;
+ line-height: inherit; 
+}
+.primary_menu {
+  background-color: #38b451;
+  background-image: linear-gradient(to right, #FFFFFF ,  #38b451); 
+}
+.primary_menu ul {
+  background: transparent;
+  display: inline-block;
+}
+.secondary_menu , .secondary_menu ul , .secondary_menu ul > .menu-text a{
+  background-color: #182933;
+  color: #fff;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  text-transform: uppercase;
+  font-weight: 400;
+  position: relative;
+}
+.secondary_menu ul li {
+  position: relative;
+}
+.secondary_menu ul > .active:after {
+  border-left: solid transparent 60px;
+  border-right: solid transparent 60px;
+  border-top: solid #182933 40px;
+  bottom: -15px;
+  content: " ";
+  height: 0;
+  left: 15%;
+  position: absolute;
+  width: 0;
+  z-index: -1;
+}
+.user_details {
+  border-left: 1px solid #fff;
+}
+.user_avatar {
+  width: 50px;
+  margin: 10px;
+  display: block;
+  float: left;
+}
+.user_name {
+  display: block;
+  font-size: 14px;
+  color: #fff;
+  font-family: 'Gotham';
+  width: calc(100% - 80px);
+  float: left;
+  margin-top: 15px;
+
+}
+
+.user_points {
+  display: block;
+  font-size: 14px;
+  color: #fff;
+  font-family: 'Gotham';
+  width: calc(100% - 80px);
+  float: left;
+}
+
+/* colors and backgrounds */
+
+.info_bg {
+  background-color: #fff;
+  position: relative;
+  display: block;
+}
+.primary_bg {
+  background-color: #182933;
+}
+.info_color , .info_color a {
+  color: #fff;
+}
+.primary_color , .primary_color a {
+  color: #182933;
+}
+.danger_color , .danger_color a {
+  color: #ff0000;
+}
+
+
+/* buttons */
+.appointment_button {
+  background: #182933;
+  color: #fff;
+  border: 1px solid #fff;
+  width: 100%;
+  font-size: 12px;
+  margin-top: -10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+.appointment_button:hover , .appointment_button:focus {
+  background: #fff;
+  color: #182933;
+  border: 1px solid #182933;
+  width: 100%;
+  font-size: 12px;
+}
+.button_appointment {
+  background: #fff;
+  color: #38b451;
+  border: 1px solid #38b451;
+  width: 100%;
+  font-size: 12px;
+  margin-top: -10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+.button_appointment:hover , .button_appointment:focus {
+  background: #38b451;
+  color: #fff;
+  border: 1px solid #38b451;
+  width: 100%;
+  font-size: 12px;
+}
+.button_edit {
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: #38b451;
+  background-color: #fff;
+  border: 1px solid #38b451;
+  position: absolute;
+  top: calc(180px);
+}
+.button_edit:hover , .button_edit:focus {
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px; 
+  background-color: #38b451;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.button_info {
+  text-align: center;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px; 
+  color: #fff;
+  background-color: #38b451;
+  border: 1px solid #fff;
+}
+.button_info:hover , .button_info:focus {
+  text-align: center;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px; 
+  background-color: #fff;
+  color: #38b451;
+  border: 1px solid #38b451;
+}
+.button_secondary {
+  text-align: center;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px; 
+  background-color: #fff;
+  color: #182933;
+  border: 1px solid #fff;
+  font-weight: 500;
+}
+.button_secondary:hover , .button_secondary:focus {
+  text-align: center;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px; 
+  color: #fff;
+  background-color: #182933;
+  border: 1px solid #fff;
+}
+.button_primary {
+  text-align: center;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px; 
+  background-color: #182933;
+  color: #fff;
+  border: 1px solid #fff;
+}
+.button_primary:hover , .button_primary:focus {
+  text-align: center;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px; 
+  color: #182933;
+  background-color: #fff;
+  border: 1px solid #182933;
+}
+.button_complete {
+  width: 40%;
+  float:right;
+}
+
+
+/* patient login */
+
+.patient_login {
+  margin-top: 6rem;
+  display: block;
+  font-family: 'Gotham';
+}
+.login_title {
+  font-size: 32px;
+  color: #fff;
+  text-align: center;
+}
+.login_forgort, .login_forgort a {
+  display: block;
+  float: right;
+  color: #fff;
+  font-size: 10px;
+}
+.login_footer {
+  margin-top: 3rem;
+}
+.login_join, .login_join a{
+  font-size: 10px;
+  color: #fff;
+  text-align: left;
+}
+
+/* my pimabima */
+
+.my_pimabima {
+  margin-top: 1px;
+  font-family: 'Gotham';
+  text-align: center;
+  vertical-align: center;
+  display: block;
+  position: relative;
+}
+.my_pimabima_item {
+  border: 1px solid #f2f2f2;
+  height: inherit;
+  min-height: 260px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 14px;
+  
+}
+.my_pimabima_item a {
+  color: #0CA1C4;
+}
+.item_row {
+  position:relative;
+  display:block;
+  padding-bottom:30px;
+}
+.item_col {
+  height:100%;
+  display:block;
+}
+.mypb_item_title {
+  font-weight: 700;
+  color: #182933;
+  padding: 5px; 
+  margin-top:5px;
+  text-transform:uppercase;
+}
+.mypb_item_title_bid {
+  font-weight: 700;
+  color: #ff0000;
+  padding: 5px; 
+}
+.mypb_item_bid {
+  font-weight: 300;
+  color: #ff0000;
+  font-size: 32px;
+}
+.avatar_img {
+  margin:0 auto;
+  padding: 10px;
+  width: 150px;
+}
+.earn_points {
+  font-family: 'Gotham'; 
+  text-align:center;
+  display:block;
+}
+.points_title {
+  font-size: 32px;
+  margin-top: 60px;
+  color: #38b451;
+  width: 50%;
+  margin: 0 auto;
+}
+.points_desc {
+  width:50%;
+  margin:0 auto;
+  font-size:16px;
+  color:#C1C1C1;
+}
+.points_links {
+  list-style:none;
+  margin-top:15px;
+}
+.points_links > li {
+  display:inline-block;
+}
+.points_links > li > a {
+  color:#4A4A4A ;
+}
+
+
+/*my account */
+
+.personal_info {
+  font-family: 'Gotham'; 
+  padding-bottom: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  
+}
+.account_item {
+  margin-top: 15px;
+}
+.account_title {
+  font-size: 12px;
+  font-family: 'Gotham'; 
+  font-weight: 300;
+  color: #333;
+  text-transform: uppercase;
+}
+.account_detail {
+  font-size: 18px;
+  font-family: 'Gotham'; 
+  font-weight: 400;
+  color: #333;
+   
+}
+
+/*popup modal */
+
+.edit_details_modal {
+  position: fixed;
+  z-index: 1;
+  top:150px;
+  left: 25%;
+  width: 50%;
+  margin:0 auto;
+  border:3px solid rgb(24, 41, 51);;
+  background: #fff;
+  padding: 10px;
+}
+
+.modal_header {
+  position: relative;
+  width: 100%;
+  height: 50px;
+}
+.modal_body {
+
+}
+.close_modal {
+  position: absolute;
+  top:5px;
+  right: 5px;
+  color:#C1C1C1;
+}
+.modal_body > form > .form_group{
+  margin-left: 10px;
+  margin-top:10px;
+  border: 1px solid #C1C1C1;
+  padding: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+}
+.modal_body > form > .date > .form_group{
+  margin-left: 10px;
+  border: 1px solid #C1C1C1;
+  padding: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 26%;
+  display: inline-block;
+
+}
+.gender {
+  width: 20%;
+  float: left;
+}
+.date {
+  width: 65%;
+  float: right;
+  color: #C1C1C1;
+  font-size: 12px;
+  font-family: 'Gotham'; 
+  vertical-align: middle;
+  border: none !important;
+  padding: 0px !important;
+}
+.select_avatar {
+    display: block;
+    width: 60%;
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+img.avatar_select {
+    width: 50px;
+    padding: 5px;
+}
+img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
+    border: 1px solid #0CA1C4;
+}
+.contact_info {
+  width: 50%;
+}
+.mailing_address {
+  width: 50%;
+}
+
+
+
+/*Insuarance Products */
+.insuarance_products {
+  font-family: 'Gotham'; 
+  text-align:center;
+  display:block;
+  position: relative;
+  margin-top: 20px;
+}
+.products_title {
+  font-size: 32px;
+  margin-top: 60px;
+  color: #F76AA1;
+  width: 100%;
+  text-align:center;
+}
+.product_tabs {
+  border: none;
+  text-align: center;
+}
+.product_tabs > li {
+  float: none;
+  display: inline-block;
+}
+.product_tabs > .is-active {
+  border-bottom:1px solid #38b451;
+  background:#fefefe;
+}
+.product_tabs > li > a {
+  text-transform: uppercase;
+  color: #38b451;
+  border: none;
+  font-weight:700;
+}
+.product_tabs > .is-active > a {
+  background: #fefefe;
+  padding-bottom: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.product_tab_content {
+  border: none;
+  margin-top: 25px;
+  text-align: left;
+}
+.insuarance_item {
+  padding-top: 10px;
+  border-bottom:1px solid #666666;
+  padding-bottom:25px;
+  color:#666666;
+}
+.insuarance_img {
+  width: 150px;
+  padding: 10px;
+}
+.insuarance_title {
+  font-size: 12px;
+  text-transform: uppercase;
+  padding:10px;
+}
+.appintment_desc {
+  display: inline-block;
+}
+.appointment_desc > h6 {
+  text-transform:uppercase;
+  font-size:14px;
+}
+.appointment_desc  > p {
+  text-transform: none;
+  font-size: 13px;
+}
+.insuarance_cost {
+  font-weight:700;
+}
+.product_title {
+  text-transform: uppercase;
+  font-size: 20px;
+}
+.doctor_title {
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 400;
+  font-family: 'Gotham'; 
+}
+.doctor_avatar {
+  padding: 10px;
+  margin-right: 0px;
+  margin-top: -15px;
+}
+.doctor_avatar_img {
+   float: right;
+   margin-top: 1em;
+   margin-right: 1em;
+   position: relative;
+   -webkit-border-radius: 50%;
+   -moz-border-radius: 50%;
+   border-radius: 50%;
+   -webkit-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+   -moz-box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+   box-shadow: 0 0 0 3px #fff, 0 0 0 4px #999, 0 2px 5px 4px rgba(0,0,0,.2);
+   padding: 2px;
+}
+.doctors_profile , .doctors_profile h3 , .doctors_profile h5 {
+  font-family: 'Gotham'; 
+  padding-left: 10px;
+  text-align: justify;
+}
+.doctors_profile h3 {
+  color: #182933;
+  font-weight: 500
+}
+.doctors_profile h5 {
+  padding-left: 0px;
+  color: #333;
+}
+.doctors_head {
+  background: #F3F3F4;
+  font-family: 'Gotham'; 
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #333;
+}
+.doctor_profile_title {
+  padding-top: 20px;
+  color: #182933;
+  text-transform: capitalize;
+}
+.doctor_profile_title h3 {
+  padding-left: 0px;
+  font-weight: 700;
+  font-size: 28px;
+  text-transform: uppercase;
+}
+.doctor_profile_title h5 {
+  font-weight: 500;
+  font-size: 24px;
+  text-transform: uppercase;
+}
+.doctor_profile_title h6 {
+  font-weight: 300;
+  text-transform: uppercase;
+}
+.cost_number {
+  font-size:32px;
+}
+.appointment_form {
+  border: 1px #333 solid;
+}
+.appointment_title {
+  background: #182933;
+  color: #fff;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+}
+.appointment_details {
+  margin-top: 10px;
+  padding: 10px;
+}
+.appointment_start {
+  text-transform:uppercase;
+  padding-top: 20px;
+}
+.appointment_end {
+  text-transform:uppercase;
+  padding-top: 20px;
+}
+.insuarance_processing {
+  text-transform:uppercase;
+  color:#2CADC5;
+  text-align:center;
+  margin-top:30px;
+}
+.insuarance_active {
+  text-transform:uppercase;
+  color:#6BAB22;
+  text-align:center;
+  margin-top:30px;
+}
+.insuarance_active_time {
+  text-transform:capitalize;
+  text-align:center;
+  color:#6BAB22;
+}
+.insuarance_expired {
+  text-transform:uppercase;
+  text-align:center;
+  color:#FF2828;
+  margin-top:30px;
+}
+
+.review_patient {
+  color:#38b451;
+}
+.review_rating {
+  color:#38b451; 
+}
+
+
+/* footer */
+.fix_footer {
+  position: absolute;
+}
+.footer_bar {
+  font-family: 'Gotham';
+  color: #A9A8AE;
+  background: #231f20;
+  background-image: linear-gradient(to left, #231f20 , #333);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: block;
+  bottom: 0;
+  width: 100%;
+  margin-top: 60px;
+}
+
+.footer_bar > .menu > li > a{
+  font-family: 'Gotham'; 
+  color: #BCB8B8;
+
+}
+.footer_bar > a {
+  color: #BCB8B8;
+}
+.footer_menu {
+  list-style: none;
+}
+.footer_menu > .menu-text {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.footer_menu > .menu-text a {
+  list-style: none;
+  color: #BCB8B8;
+  font-weight: 300;
+  font-size: 14px;
+}
+.footer_social_media {
+    margin-top: 10px;
+    padding-top: 10px;
+    width: 100%;
+    display: inline-block;
+}
+.footer_social_media {
+    display: block;
+    position: relative;
+    margin-top: 70px;
+}
+.footer_social_media > a {
+  color: #BCB8B8;
+}
+.footer_social_media > a > i {
+    padding: 5px;
+}
+.copyright {
+  font-size:14px;
+}

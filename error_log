@@ -1,0 +1,3 @@
+[09-Mar-2017 12:49:41 Africa/Nairobi] PHP Parse error:  syntax error, unexpected '?' in /home/dezarite/public_html/clientzone/mdaktari-web/application/views/doctor/new_appointment.php on line 33
+[09-Mar-2017 14:01:20 Africa/Nairobi] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/dezarite/public_html/clientzone/mdaktari-web/application/views/patient/new_appointment.php on line 109
+[09-Mar-2017 14:02:09 Africa/Nairobi] PHP Parse error:  syntax error, unexpected '?>' in /home/dezarite/public_html/clientzone/mdaktari-web/application/views/patient/new_appointment.php on line 105
