@@ -73,7 +73,44 @@
                           <h3 class="schedule_title"> Todays Schedule </h3>
                           <hr/>
                          
-                          
+                          <?php  //var_dump($schedule)?>
+                          <?php if(!is_array($schedule)){
+                                echo 'Today is an off day for you, enjoy :-)';
+                            } else {
+                                 for($s = 0 ; $s < count($schedule); $s++) {
+                          ?>
+                                 
+                                  <div class="row">
+                                    <div class="large-4 columns">
+                                         <span class="s_title">Time :</span> </br>
+                                        <?php if(isset($schedule[$s]['appointment_time'])){ ?>
+                                        <?php echo $schedule[$s]['appointment_time']; ?>
+                                      <?php } else { ?>
+                                        <?php echo $schedule[$s]['start_time']; ?> to <br/>
+                                        <?php echo $schedule[$s]['end_time']; ?>
+                                      <?php } ?>
+                                    </div>
+                                    <div class="large-4 columns">
+                                         <span class="s_title"> Reason : </span> </br>
+                                          <?php if(isset($schedule[$s]['appointment_reason'])){ ?>
+                                          <?php echo $schedule[$s]['appointment_reason']; ?>
+                                        <?php } else { ?>
+                                          Personal
+                                        <?php } ?>
+                                    </div>
+                                    <div class="large-4 columns">
+                                         <span class="s_title">Name : </span> </br>
+                                          <?php if(isset($schedule[$s]['patient_name'])){ ?>
+                                          <?php echo $schedule[$s]['patient_name']; ?>
+                                        <?php } else { 
+                                           echo $user_profile['0']['fullname'];
+                                         } ?>
+                                    </div>
+                                  </div>
+
+                          <?php 
+                                 }
+                           }?>
                         
                       </div>
                   </div>

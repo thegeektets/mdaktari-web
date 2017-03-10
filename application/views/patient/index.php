@@ -31,13 +31,19 @@
                   } ?> </div>
          </div>
          <div class="large-2 columns my_pimabima_item">
-              <div class="mypb_item_title"> APPOINTMENT HISTORY </div>
-              <div> 3 Pending Appointments   </div>
+              <div class="mypb_item_title"> APPOINTMENTS </div>
+              <div> 
+              <?php if(count($schedule) == 1) {
+                    echo '1 Appointment Today';
+                } else { ?>
+              <?php echo count($schedule)?> Appointments Today  
+              <?php } ?>
+              </div>
          </div>
          <div class="large-2 columns my_pimabima_item">
               <div class="mypb_item_title"> ACCOUNT INFO </div>
               YOUR MDAKTARI ACCOUNT #
-              006 
+              <?php echo $user_profile['0']['user_id']; ?> 
          </div>
          <div class="large-2 columns">
          </div>

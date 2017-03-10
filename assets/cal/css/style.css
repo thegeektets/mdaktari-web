@@ -103,6 +103,14 @@ body h1 {
 	background: #38b451;
     /* border-left: px solid #38b451; */
     padding-top: 1em;
+    color: #fff;
+    text-align: center;
+
+}
+.s_title{
+	color: #f1f1f1;
+	text-transform: uppercase;
+	text-align: center;
 }
 #slider2,
 #slider3 {

@@ -7,13 +7,24 @@ class Patient_model extends CI_Model {
                 parent::__construct();
                 $this->load->database(); 
         }
+
+        public function get_today_patient_appointments($user_id){
+            $date = date("Y-m-d");
+            $sql = $this->db->query('select * from user, doctor_table, bookings_calendar WHERE user.id = doctor_table.user_id AND doctor_table.user_id = bookings_calendar.doctor_id AND bookings_calendar.patient_id = '.$user_id.' AND bookings_calendar.appointment_date = " '.$date.' " GROUP BY bookings_calendar.appointment_id');
+            return array_reverse($sql->result_array());
+        }
         public function get_user_appointments($user_id) {
-            $sql = $this->db->query('select * from user, doctor_table, bookings_calendar WHERE user.id = doctor_table.user_id AND doctor_table.user_id = bookings_calendar.doctor_id AND bookings_calendar.patient_id = '.$user_id);
+            $sql = $this->db->query('select * from user, doctor_table, bookings_calendar WHERE user.id = doctor_table.user_id AND doctor_table.user_id = bookings_calendar.doctor_id AND bookings_calendar.patient_id = '.$user_id.' GROUP BY bookings_calendar.appointment_id');
             return array_reverse($sql->result_array());
 
         }
         public function search_doctor($search_input) {
-            
+                if($search_input == '' || $search_input == null){
+
+                    $query = $this->db->query('select * from user, doctor_table where user.id = doctor_table.user_id');
+                    return  $query-> result_array();
+                   
+                }
                 $query1 = $this->db->query('select * from user, doctor_table where user.id = doctor_table.user_id AND fullname LIKE "%'.$search_input.'%"');
                 $result1 =  $query1-> result_array();
 
@@ -25,8 +36,8 @@ class Patient_model extends CI_Model {
 
                 $query4 = $this->db->query('select * from user, doctor_table where user.id = doctor_table.user_id AND country LIKE "%'.$search_input.'%"');
                 $result4 =  $query4-> result_array();
-                return array_merge($result1,$result2,$result3,$result4);
-       
+                return array_unique(array_merge($result1,$result2,$result3,$result4), SORT_REGULAR);
+                
         }
         public function get_all_patients() {
             $query = $this->db->query("select * from user, patient_table where user.id = patient_table.user_id AND user.user_type = 'patient'");

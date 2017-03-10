@@ -5,13 +5,36 @@ class Doctor_model extends CI_Model {
         {
                 // Call the CI_Model constructor
                 parent::__construct();
+                $this->load->model('calendar_model');
                 $this->load->database(); 
         }
 
+        public function get_schedule_today($doctor_id) {
+                $date = date();
+                $day = date("D", strtotime($date));
+
+                $query = $this->db->query('select * from calendar_settings WHERE doctor_id = '.$doctor_id.' AND  work_day LIKE "'.$day.'%"');
+                $result = $query->result_array();
+                
+                $off_day = $result['0']['off_day'];
+                
+                
+                if($off_day == TRUE){
+                     return 0;
+                } else {
+                    // load personal schedule and bookings then return the results
+                    $resultb = $this->calendar_model->load_bookings($doctor_id , $date);
+                    $queryp = $this->db->query('select * from schedule_calendar WHERE doctor_id = '.$doctor_id.' AND date = "'.$appointment_date.'"');
+                    $resultp = $queryp->result_array();
+
+                    return array_merge($resultp,$resultb);
+               }
+                  
+        }
         public function get_all_doctors() {
             $query = $this->db->query("select * from user, doctor_table where user.id = doctor_table.user_id AND user.user_type = 'doctor'");
             return $query->result_array();
-        }
+        }   
         
         public function add_doctor($data) {
             $password = $data['password'];

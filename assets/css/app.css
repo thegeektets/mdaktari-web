@@ -506,6 +506,7 @@ img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
   display:block;
   position: relative;
   margin-top: 20px;
+  padding-bottom: 20%;
 }
 .products_title {
   font-size: 32px;
@@ -835,15 +836,28 @@ img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
   color: #fff;
   font-weight: 400;
   font-family: 'Gotham';
+  margin-top: 1p6x;
+  font-size: 22px;
 }
 .schedule_link {
     text-align: right;
     padding: 5px;
+    color: #fff;
 }
 .schedule_link a {
-  font-size: 18px;
+  font-size: 14px;
   color: #fff;
+  margin-bottom: -7px;
 }
 .pull-left{
   float: left !important;
+}
+.button.secondary {
+    background-color: #182933 !important;
+    color: #fefefe;
+}
+.no_results {
+    padding-bottom: 20%;
+    font-size: 26px;
+    padding-top: 10%;
 }

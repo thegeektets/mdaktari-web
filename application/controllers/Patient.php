@@ -19,6 +19,7 @@ class Patient extends CI_Controller {
 		if(isset($data['user_session']['logged_in']) && $data['user_session']['logged_in'] == 'TRUE'){
 			$user_id = $data['user_session']['user_meta']['0']['id'];
 			$data['user_profile'] = $this->user_model->get_user_profile($user_id);
+			$data['schedule'] = $this->patient_model->get_today_patient_appointments($user_id);
 			$this->load->helper(array('form', 'url'));
 			$this->load->view('patient/header', $data);
 			$this->load->view('patient/index', $data);
@@ -294,15 +295,20 @@ class Patient extends CI_Controller {
 	        	   if($value == TRUE){
 	        	   		$data['success'] = TRUE;
 	        			$data['message'] =  'Added new appointment';
+	        			$this->load->view('patient/header', $data);
+	        			$this->load->view('patient/appointments', $data);
+	        			$this->load->view('patient/footer', $data);
+	        	   
 	        	   } else {
 	        	   		$data['success'] = FALSE;
 	        			$data['message'] =  'Failed to add appointment'. $value;
+	        			$this->load->view('patient/header', $data);
+	        			$this->load->view('patient/new_appointment', $data);
+	        			$this->load->view('patient/footer', $data);
 	        	   }
 		   	}
 	
-		   	$this->load->view('patient/header', $data);
-		   	$this->load->view('patient/new_appointment', $data);
-		   	$this->load->view('patient/footer', $data);
+		   	
 			
 		}
 }

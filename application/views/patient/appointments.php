@@ -21,6 +21,21 @@
 
    <div class="insuarance_products">
         <div class="row">
+            <?php
+                  if( isset($success) && ($success === TRUE)) {
+                      echo '<div class="alert-box success">'
+                            .$message.'
+                            <a href="#"" class="close" id="close">&times;</a>
+                            </div>';
+                  } else if( isset($success) && ($success === FALSE)) {
+                      echo '<div class="alert-box warning">'
+                            .$message.'
+                            <a href="#"" class="close" id="close">&times;</a>
+                            </div>';
+                  }
+               ?>
+        </div>
+        <div class="row">
              <?php for($i=0 ; $i < count($user_appointments); $i++){ ?>
              <div class="insuarance_item">
                         <div class = "row">

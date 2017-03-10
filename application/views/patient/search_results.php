@@ -42,7 +42,9 @@
             </form> 
         </div>
         <div class="row">
-                   <?php for($i=0; $i < count($doctor_results); $i++) { ?>
+            <?php //var_dump($doctor_results); ?>
+            <?php if(count($doctor_results) > 0 ){ ?>
+              <?php for($i=0; $i < count($doctor_results); $i++) { ?>
                      <div class="insuarance_item">
                          <div class = "row">
                              <div class="large-2 columns">
@@ -86,5 +88,11 @@
                          </div>
                      </div>
                      <?php } ?>
-                 </div>
+            <?php } else { ?>
+                <div class="no_results">
+                    <p> No Results found for your search :-(</p>
+                </div>
+                  
+            <?php } ?> 
+        </div>
     </div>
