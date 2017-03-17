@@ -550,6 +550,9 @@ img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
   padding-bottom:25px;
   color:#666666;
 }
+.insuarance_item.expired {
+    background: #eee;
+}
 .insuarance_img {
   width: 150px;
   padding: 10px;
@@ -860,4 +863,29 @@ img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
     padding-bottom: 20%;
     font-size: 26px;
     padding-top: 10%;
+}
+
+/* rating things */
+
+.rating {
+    overflow: hidden;
+    display: inline-block;
+}
+.rating-input {
+    position: absolute;
+    left: 0;
+    top: -50px;
+    display: none;
+}
+.rating-star {        
+    display: block;
+    float: right;        
+    width: 16px;
+    height: 16px;
+    background-color: #3bb554;
+    background: url('http://kubyshkin.ru/samples/star-rating/star.png') 0 -16px;
+}
+.rating-star:hover,
+.rating-star:hover ~ .rating-star {
+    background-position: 0 0;
 }

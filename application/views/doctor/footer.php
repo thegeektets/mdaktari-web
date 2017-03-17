@@ -46,6 +46,10 @@
     <script src="<?php echo base_url('/assets/js/vendor/foundation.js')?>"></script>
     <script src="<?php echo base_url('/assets/js/app.js')?>"></script>    
     <script type="text/javascript">
+        $('.disabled').click(function(e) {
+            e.preventDefault();
+            //do other stuff when a click happens
+        });
         $('.appointment_date').change(function (){
 
                var date = $(this).val();

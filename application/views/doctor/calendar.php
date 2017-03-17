@@ -75,8 +75,15 @@
                          
                           <?php  //var_dump($schedule)?>
                           <?php if(!is_array($schedule)){
-                                echo 'Today is an off day for you, enjoy :-)';
+                                echo '<div style="padding-bottom:15px">
+                                      Today is an off day for you, enjoy :-)
+                                      </div>';
                             } else {
+                                 if(count($schedule)<1){
+                                echo '<div style="padding-bottom:15px">
+                                        You have 0 appointments today
+                                      </div>';
+                                 } else {
                                  for($s = 0 ; $s < count($schedule); $s++) {
                           ?>
                                  
@@ -108,7 +115,7 @@
                                     </div>
                                   </div>
 
-                          <?php 
+                          <?php   }
                                  }
                            }?>
                         

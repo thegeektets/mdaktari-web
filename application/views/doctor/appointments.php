@@ -39,7 +39,8 @@
                   }
                ?>
             <?php for($i=0 ; $i < count($user_appointments); $i++){ ?>
-             <div class="insuarance_item">
+             <div class="insuarance_item <?php if(date('d-m-Y',strtotime($user_appointments[$i]['appointment_date'])) < date('d-m-Y')){
+                          echo 'expired';}?>">
                         <div class = "row">
                             <div class="large-2 columns">
                                 <img src="<?php echo $user_appointments[$i]['user_avatar']; ?>" class="user_img">
@@ -89,17 +90,29 @@
                                       <a class="button button_appointment">
                                           Reschedule Appointment
                                       </a>
-                                      <a class="button button_cancel">
-                                          Cancel Appointment
+                                      <a  class="button button_cancel" href="<?php echo base_url("index.php/doctor/cancel_appointment/".$user_appointments[$i]['appointment_id']); ?>"
+
+                                      <?php if(date('d-m-Y',strtotime($user_appointments[$i]['appointment_date'])) < date('d-m-Y')){
+                                                                echo 'disabled="true"';}?>">                           Cancel Appointment
                                       </a>
                               <?php } else if ($user_appointments[$i]['appointment_status'] =='DECLINED') {
-
                                ?>      
+                                    <div class="appointment_status declined">
+                                        Appointment Declined
+                                    </div>
+                                    <a class="button button_appointment" href="<?php echo base_url("index.php/doctor/confirm_appointment/".$user_appointments[$i]['appointment_id']); ?>"
+                                      <?php if(date('d-m-Y',strtotime($user_appointments[$i]['appointment_date'])) < date('d-m-Y')){
+                                                                echo 'disabled="true"';}?>">
+                                        CONFIRM APPOINTMENT
+                                    </a>
                               <?php } else { ?>
-                                  <a class="button button_appointment" href="<?php echo base_url("index.php/doctor/confirm_appointment/".$user_appointments[$i]['appointment_id']); ?>">
+                                  <a class="button button_appointment" href="<?php echo base_url("index.php/doctor/confirm_appointment/".$user_appointments[$i]['appointment_id']); ?>"
+                                    <?php if(date('d-m-Y',strtotime($user_appointments[$i]['appointment_date'])) < date('d-m-Y')){
+                                                                echo 'disabled="true"';}?>">
                                       CONFIRM APPOINTMENT
                                   </a>
-                                  <a class="button button_cancel" href="<?php echo base_url("index.php/doctor/decline_appointment/".$user_appointments[$i]['appointment_id']); ?>">
+                                  <a class="button button_cancel" href="<?php echo base_url("index.php/doctor/decline_appointment/".$user_appointments[$i]['appointment_id']); ?>"<?php if(date('d-m-Y',strtotime($user_appointments[$i]['appointment_date'])) < date('d-m-Y')){
+                                                                echo 'disabled="true"';}?>">
                                       Decline Appointment
                                   </a>
                               <?php } ?>

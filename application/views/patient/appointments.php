@@ -37,7 +37,8 @@
         </div>
         <div class="row">
              <?php for($i=0 ; $i < count($user_appointments); $i++){ ?>
-             <div class="insuarance_item">
+             <div class="insuarance_item <?php if(date('d-m-Y',strtotime($user_appointments[$i]['appointment_date'])) < date('d-m-Y')){
+                          echo 'expired';}?>">
                         <div class = "row">
                             <div class="large-2 columns">
                                 <img src="<?php echo $user_appointments[$i]['user_avatar']; ?>" class="user_img">
@@ -78,18 +79,47 @@
                                       <?php echo $user_appointments[$i]['appointment_time']; ?>
                                   </div>
                             </div>
-                          
+                            <?php if(date('d-m-Y',strtotime($user_appointments[$i]['appointment_date'])) < date('d-m-Y')){
+                            ?>
                             <div class="large-2 columns">
-                                  <a class="button button_appointment">
+                                  <a class="button button_appointment" href="<?php echo base_url("index.php/patient/review_doctor/".$user_appointments[$i]['doctor_id']); ?>">
                                       REVIEW DOCTOR
                                   </a>
-                                  <a class="button button_appointment">
-                                      Reschedule Appointment
-                                  </a>
-                                  <a class="button button_cancel">
-                                      Cancel Appointment
-                                  </a>
                             </div>
+                            <?php } else { ?>
+                            <div class="large-2 columns">
+                                  <?php if($user_appointments[$i]['appointment_status'] == 'CONFIRMED'){ ?>
+                                          <div class="appointment_status">
+                                              Appointment Confirmed
+                                          </div>
+                                          <a class="button button_appointment">
+                                              Reschedule Appointment
+                                          </a>
+                                          <a  class="button button_cancel" href="<?php echo base_url("index.php/patient/cancel_appointment/".$user_appointments[$i]['appointment_id']); ?>"
+
+                                          <?php if(date('d-m-Y',strtotime($user_appointments[$i]['appointment_date'])) < date('d-m-Y')){
+                                                                    echo 'disabled="true"';}?>">                           Cancel Appointment
+                                          </a>
+                                  <?php } else if ($user_appointments[$i]['appointment_status'] =='DECLINED') {
+                                   ?>     
+                                        <div class="appointment_status declined">
+                                            Appointment Declined
+                                        </div>
+                                        <a class="button button_appointment">
+                                           Reschedule Appointment
+                                        </a> 
+                                        
+                                  <?php } else { ?>
+                                      <a class="button button_appointment">
+                                          Reschedule Appointment
+                                      </a>
+                                      <a class="button button_cancel" href="<?php echo base_url("index.php/patient/decline_appointment/".$user_appointments[$i]['appointment_id']); ?>"<?php if(date('d-m-Y',strtotime($user_appointments[$i]['appointment_date'])) < date('d-m-Y')){
+                                                                    echo 'disabled="true"';}?>">
+                                          Cancel ppointment
+                                      </a>
+                                  <?php } ?>
+                            </div>
+                            <?php } ?>
                         </div>
              </div>
              <?php } ?>

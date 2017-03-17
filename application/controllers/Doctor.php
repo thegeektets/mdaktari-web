@@ -244,10 +244,10 @@ class Doctor extends CI_Controller {
 				$return = $this->doctor_model->update_appointment_status($booking_id, $status);
 
 				if($return == TRUE) {
-				    $data['status'] = TRUE;
+				    $data['success'] = TRUE;
 				    $data['message'] = 'Appointment confirmed successfully';	
 				} else {
-					$data['status'] = FALSE;
+					$data['success'] = FALSE;
 				    $data['message'] = 'Failed to update appointment status'.$return;
 				} 
 				$user_id = $data['user_session']['user_meta']['0']['id'];
@@ -276,10 +276,42 @@ class Doctor extends CI_Controller {
 				$return = $this->doctor_model->update_appointment_status($booking_id, $status);
 
 				if($return == TRUE) {
-				    $data['status'] = TRUE;
+				    $data['success'] = TRUE;
 				    $data['message'] = 'Appointment confirmed successfully';	
 				} else {
-					$data['status'] = FALSE;
+					$data['success'] = FALSE;
+				    $data['message'] = 'Failed to update appointment status'.$return;
+				} 
+				$user_id = $data['user_session']['user_meta']['0']['id'];
+				$data['user_profile'] = $this->user_model->get_user_profile($user_id);
+				$data['user_appointments'] = $this->doctor_model->get_user_appointments($user_id);
+				$this->load->helper(array('form', 'url'));
+				$this->load->view('doctor/header' , $data);
+				$this->load->view('doctor/appointments', $data);
+				$this->load->view('doctor/footer');	
+		} else {
+	 	    $data['success'] = FALSE;
+		    $data['message'] =  'login is required';
+			$this->load->helper(array('form', 'url'));
+			$this->load->view('registration/header');
+			$this->load->view('registration/index', $data);
+			$this->load->view('registration/footer');		
+		}   
+    }
+
+    // cancel appointment
+    public function cancel_appointment($booking_id) {
+    	$this->load->library('session');
+		$data['user_session'] = $this->session->all_userdata();
+		if(isset($data['user_session']['logged_in']) && $data['user_session']['logged_in'] == 'TRUE'){
+				$status = 'DECLINED';
+				$return = $this->doctor_model->update_appointment_status($booking_id, $status);
+
+				if($return == TRUE) {
+				    $data['success'] = TRUE;
+				    $data['message'] = 'Appointment cancelled';	
+				} else {
+					$data['success'] = FALSE;
 				    $data['message'] = 'Failed to update appointment status'.$return;
 				} 
 				$user_id = $data['user_session']['user_meta']['0']['id'];

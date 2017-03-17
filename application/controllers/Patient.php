@@ -250,6 +250,49 @@ class Patient extends CI_Controller {
 		}
 	}
 
+	public function review_doctor($doctor_id)
+	{	
+		$this->load->library('session');
+		$data['user_session'] = $this->session->all_userdata();
+		if(isset($data['user_session']['logged_in']) && $data['user_session']['logged_in'] == 'TRUE'){
+			$user_id = $data['user_session']['user_meta']['0']['id'];
+			$data['user_profile'] = $this->user_model->get_user_profile($user_id);
+			$data['doctor_profile'] = 
+			$this->doctor_model->get_doctor_profile($doctor_id);
+			$this->load->helper(array('form', 'url'));
+			$this->load->view('patient/header' , $data);
+			$this->load->view('patient/review_doctor', $data);
+			$this->load->view('patient/footer');	
+		} else {
+	 	    $data['success'] = FALSE;
+		    $data['message'] =  'login is required';
+			$this->load->helper(array('form', 'url'));
+			$this->load->view('registration/header');
+			$this->load->view('registration/index', $data);
+			$this->load->view('registration/footer');	
+		}
+	}
+	public function review_form($doctor_id)
+	{
+		$this->load->library('session');
+		$data['user_session'] = $this->session->all_userdata();
+		if(isset($data['user_session']['logged_in']) && $data['user_session']['logged_in'] == 'TRUE'){
+			$user_id = $data['user_session']['user_meta']['0']['id'];
+			$data['user_profile'] = $this->user_model->get_user_profile($user_id);
+			$data['doctor_profile'] = $this->doctor_model->get_doctor_profile($doctor_id);
+			$this->load->helper(array('form', 'url'));
+			$this->load->view('patient/header' , $data);
+			$this->load->view('patient/new_appointment', $data);
+			$this->load->view('patient/footer');	
+		} else {
+	 	    $data['success'] = FALSE;
+		    $data['message'] =  'login is required';
+			$this->load->helper(array('form', 'url'));
+			$this->load->view('registration/header');
+			$this->load->view('registration/index', $data);
+			$this->load->view('registration/footer');	
+		}
+	}
 	public function add_appointment($doctor_id)
 	{
 		$this->load->library('session');
