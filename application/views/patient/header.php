@@ -1,4 +1,4 @@
-<?php error_reporting(0); ?>
+<?php //error_reporting(0); ?>
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
   <head>

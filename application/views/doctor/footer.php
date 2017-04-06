@@ -46,6 +46,10 @@
     <script src="<?php echo base_url('/assets/js/vendor/foundation.js')?>"></script>
     <script src="<?php echo base_url('/assets/js/app.js')?>"></script>    
     <script type="text/javascript">
+        $('.disabled').click(function(e) {
+            e.preventDefault();
+            //do other stuff when a click happens
+        });
         $('.appointment_date').change(function (){
 
                var date = $(this).val();
@@ -68,7 +72,6 @@
                           $('.appointment_message').append('<a href="#"" class="close" id="close">&times;</a>');
                           $('.appointment_message').show();
                           setTimeout("$('.appointment_message').hide();" , 3000);
-<<<<<<< HEAD
                       } else if (data == 3){
                           $('.appointment_time').prop('disabled', true);
                           $('.appointment_message').hide();
@@ -77,11 +80,9 @@
                           $('.appointment_message').append('<a href="#"" class="close" id="close">&times;</a>');
                           $('.appointment_message').show();
                           setTimeout("$('.appointment_message').hide();" , 3000);
-=======
->>>>>>> 1db99937cfa4211d6d9ce5399ea6cba18ed50fdd
                       } else {
                           $('.appointment_time').empty();
-                          $('.appointment_time').append('<option>Select the Appintment Time </option');
+                          $('.appointment_time').append('<option>Select the Appointment Time </option');
                           $('.appointment_time').prop('disabled', false);
                           var times  = data;
                           var time = [];

@@ -25,7 +25,6 @@
   
    <div class="insuarance_products">
         <div class="row">
-<<<<<<< HEAD
             <?php
                   if( isset($success) && ($success === TRUE)) {
                       echo '<div class="alert-box success">'
@@ -40,7 +39,8 @@
                   }
                ?>
             <?php for($i=0 ; $i < count($user_appointments); $i++){ ?>
-             <div class="insuarance_item">
+             <div class="insuarance_item <?php if(date('Y-m-d H:i:s',strtotime($user_appointments[$i]['appointment_date'])) < date('Y-m-d H:i:s')){
+                          echo 'expired';}?>">
                         <div class = "row">
                             <div class="large-2 columns">
                                 <img src="<?php echo $user_appointments[$i]['user_avatar']; ?>" class="user_img">
@@ -87,20 +87,30 @@
                                       <div class="appointment_status">
                                           Appointment Confirmed
                                       </div>
-                                      <a class="button button_appointment">
+                                      <a class="button button_appointment" href="<?php echo base_url('index.php/doctor/reschedule_appointment/'.$user_appointments[$i]['appointment_id']);?>">
                                           Reschedule Appointment
                                       </a>
-                                      <a class="button button_cancel">
-                                          Cancel Appointment
+                                      <a  class="button button_cancel" href="<?php echo base_url("index.php/doctor/cancel_appointment/".$user_appointments[$i]['appointment_id']); ?>"
+
+                                      <?php if(date('Y-m-d H:i:s',strtotime($user_appointments[$i]['appointment_date'])) < date('Y-m-d H:i:s')){
+                                                                echo 'disabled="true"';}?>">                           Cancel Appointment
                                       </a>
                               <?php } else if ($user_appointments[$i]['appointment_status'] =='DECLINED') {
-
                                ?>      
+                                    <div class="appointment_status declined">
+                                        Appointment Declined
+                                    </div>
+                                    <a class="button button_appointment" href="<?php echo base_url("index.php/doctor/confirm_appointment/".$user_appointments[$i]['appointment_id']); ?>"
+                                      <?php if(date('Y-m-d H:i:s',strtotime($user_appointments[$i]['appointment_date'])) < date('Y-m-d H:i:s')){
+                                                                echo 'disabled="true"';}?>">
+                                        CONFIRM APPOINTMENT
+                                    </a>
                               <?php } else { ?>
-                                  <a class="button button_appointment" href="<?php echo base_url("index.php/doctor/confirm_appointment/".$user_appointments[$i]['appointment_id']); ?>">
+                                  <a class="button button_appointment" href="<?php echo base_url("index.php/doctor/confirm_appointment/".$user_appointments[$i]['appointment_id']); ?>"
+                                    <?php if(date('Y-m-d H:i:s',strtotime($user_appointments[$i]['appointment_date'])) < date('Y-m-d H:i:s')){echo 'disabled="true"';}?>">
                                       CONFIRM APPOINTMENT
                                   </a>
-                                  <a class="button button_cancel" href="<?php echo base_url("index.php/doctor/decline_appointment/".$user_appointments[$i]['appointment_id']); ?>">
+                                  <a class="button button_cancel" href="<?php echo base_url("index.php/doctor/decline_appointment/".$user_appointments[$i]['appointment_id']); ?>"<?php if(date('Y-m-d H:i:s',strtotime($user_appointments[$i]['appointment_date'])) < date('Y-m-d H:i:s')){echo 'disabled="true"';}?>">
                                       Decline Appointment
                                   </a>
                               <?php } ?>
@@ -109,143 +119,6 @@
                         </div>
              </div>
              <?php } ?>
-=======
-                   <div class="insuarance_item">
-                        <div class = "row">
-                            <div class="large-2 columns">
-                                <img src="assets/img/avatar2.png" class="insuarance_img">
-                                <div class="insuarance_title"> Dr. Faith M Vuku </div>
-                            </div>
-                            <div class="large-4 columns">
-                                 <div class="insuarance_cost">
-                                     <span class="cost_number"> Heart Specialist </span>
-                                 </div>
-                                 <div class="appointment_desc">
-                                    <h6>
-                                    Appointment Reason : 
-                                    </h6>
-                                    <p>
-                                    Lorem ipsum dolor sit amet, quis nusquam no his, novum ceteros eum at. Probo partem sea id, et delenit eligendi conclusionemque usu, qui facilis splendide intellegam ei. Quo in habeo laoreet. Sea omnes verterem constituam in.
-                                    </p>
-                                 </div>
-                            </div>
-                            <div class="large-2 columns">
-                                  <div class="appointment_start">
-                                      JANUARY 5, 2017 9.30 AM
-                                  </div>
-                                  <div class="appointment_end">
-                                      JANUARY 5, 2017 10.30 AM
-                                  </div>
-                            </div>
-                            <div class="large-2 columns">
-                                  <div class="insuarance_processing">
-                                      
-                                  </div>
-                            </div>
-                            <div class="large-2 columns">
-                                  <a class="button button_appointment">
-                                      VIEW
-                                  </a>
-                                  <a class="button button_appointment">
-                                      Reschedule
-                                  </a>
-                                  <a class="button button_appointment">
-                                      Cancel
-                                  </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="insuarance_item">
-                        <div class = "row">
-                            <div class="large-2 columns">
-                                <img src="assets/img/avatar2.png" class="insuarance_img">
-                                <div class="insuarance_title"> Dr. Faith M Vuku </div>
-                            </div>
-                                    <div class="large-4 columns">
-                                 <div class="insuarance_cost">
-                                     <span class="cost_number"> Heart Specialist </span>
-                                 </div>
-                                 <div class="appointment_desc">
-                                    <h6>
-                                    Appointment Reason : 
-                                    </h6>
-                                    <p>
-                                    Lorem ipsum dolor sit amet, quis nusquam no his, novum ceteros eum at. Probo partem sea id, et delenit eligendi conclusionemque usu, qui facilis splendide intellegam ei. Quo in habeo laoreet. Sea omnes verterem constituam in.
-                                    </p>
-                                 </div>
-                            </div>
-                            <div class="large-2 columns">
-                                  <div class="appointment_start">
-                                      JANUARY 5, 2017 9.30 AM
-                                  </div>
-                                  <div class="appointment_end">
-                                      JANUARY 5, 2017 10.30 AM
-                                  </div>
-                            </div>
-                            <div class="large-2 columns">
-                                  <div class="insuarance_processing">
-                                      
-                                  </div>
-                            </div>
-                            <div class="large-2 columns">
-                                  <a class="button button_appointment">
-                                      VIEW
-                                  </a>
-                                  <a class="button button_appointment">
-                                      Reschedule
-                                  </a>
-                                  <a class="button button_appointment">
-                                      Cancel
-                                  </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="insuarance_item">
-                        <div class = "row">
-                            <div class="large-2 columns">
-                                <img src="assets/img/avatar2.png" class="insuarance_img">
-                                <div class="insuarance_title"> Dr. Betty G Kanini </div>
-                            </div>
-                                    <div class="large-4 columns">
-                                 <div class="insuarance_cost">
-                                     <span class="cost_number"> Heart Specialist </span>
-                                 </div>
-                                 <div class="appointment_desc">
-                                    <h6>
-                                    Appointment Reason : 
-                                    </h6>
-                                    <p>
-                                    Lorem ipsum dolor sit amet, quis nusquam no his, novum ceteros eum at. Probo partem sea id, et delenit eligendi conclusionemque usu, qui facilis splendide intellegam ei. Quo in habeo laoreet. Sea omnes verterem constituam in.
-                                    </p>
-                                 </div>
-                            </div>
-                            <div class="large-2 columns">
-                                  <div class="appointment_start">
-                                      JANUARY 5, 2017 9.30 AM
-                                  </div>
-                                  <div class="appointment_end">
-                                      JANUARY 5, 2017 10.30 AM
-                                  </div>
-                            </div>
-                            <div class="large-2 columns">
-                                  <div class="insuarance_processing">
-                                      
-                                  </div>
-                            </div>
-                            <div class="large-2 columns">
-                                  <a class="button button_appointment">
-                                      View
-                                  </a>
-                                  <a class="button button_appointment">
-                                      Reschedule
-                                  </a>
-                                  <a class="button button_appointment">
-                                      Cancel
-                                  </a>
-                            </div>
-                        </div>
-                    </div>
->>>>>>> 1db99937cfa4211d6d9ce5399ea6cba18ed50fdd
         </div>
         <div style="clear: both"></div>
     </div>

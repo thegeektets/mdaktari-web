@@ -8,6 +8,7 @@ class Doctor extends CI_Controller {
        parent::__construct();
        $this->load->model('user_model');
        $this->load->model('doctor_model');
+       $this->load->model('patient_model');
        $this->load->model('calendar_model');
        //error_reporting(0);
    	}
@@ -19,6 +20,7 @@ class Doctor extends CI_Controller {
 		if(isset($data['user_session']['logged_in']) && $data['user_session']['logged_in'] == 'TRUE'){
 			$user_id = $data['user_session']['user_meta']['0']['id'];
 			$data['user_profile'] = $this->user_model->get_user_profile($user_id);
+			$data['schedule'] = $this->doctor_model->get_schedule_today($user_id); 
 			$this->load->helper(array('form', 'url'));
 			$this->load->view('doctor/header', $data);
 			$this->load->view('doctor/index', $data);
@@ -62,6 +64,7 @@ class Doctor extends CI_Controller {
 			$user_id = $data['user_session']['user_meta']['0']['id'];
 			$data['calendar'] = $this->calendar_model->load_calendar($user_id);
 			$data['user_profile'] = $this->user_model->get_user_profile($user_id);
+			$data['schedule'] = $this->doctor_model->get_schedule_today($user_id); 
 			$this->load->helper(array('form', 'url'));
 			$this->load->view('doctor/header' , $data);
 			$this->load->view('doctor/calendar', $data);
@@ -95,6 +98,72 @@ class Doctor extends CI_Controller {
 			$this->load->view('registration/index', $data);
 			$this->load->view('registration/footer');	
 		}
+	}
+
+	public function reschedule_appointment($appointment_id)
+	{
+		$this->load->library('session');
+		$data['user_session'] = $this->session->all_userdata();
+		
+		if(isset($data['user_session']['logged_in']) && $data['user_session']['logged_in'] == 'TRUE'){
+			$user_id = $data['user_session']['user_meta']['0']['id'];
+			$data['user_profile'] = $this->user_model->get_user_profile($user_id);
+			$data['user_appointment'] = $this->patient_model->get_appointment($appointment_id);
+			$data['patient_profile'] = $this->patient_model->get_patient_profile($data['user_appointment'][0]['patient_id']);
+			$this->load->helper(array('form', 'url'));
+			$this->load->view('doctor/header' , $data);
+			$this->load->view('doctor/edit_appointment', $data);
+			$this->load->view('doctor/footer');	
+		} else {
+	 	    $data['success'] = FALSE;
+		    $data['message'] =  'login is required';
+			$this->load->helper(array('form', 'url'));
+			$this->load->view('registration/header');
+			$this->load->view('registration/index', $data);
+			$this->load->view('registration/footer');	
+		}
+	}
+
+	public function edit_appointment($appointment_id){
+		$this->load->library('session');
+		$data['user_session'] = $this->session->all_userdata();
+		$user_id = $data['user_session']['user_meta']['0']['id'];
+		$data['user_profile'] = $this->user_model->get_user_profile($user_id);
+		$data['user_appointment'] = $this->patient_model->get_appointment($appointment_id);
+		$data['patient_profile'] = $this->patient_model->get_patient_profile($data['user_appointment'][0]['patient_id']);
+		$this->load->helper(array('form', 'url'));
+	    	$this->load->library('form_validation');
+	        $this->form_validation->set_rules('appointment_reason', 'appointment_reason ', 'required'); 
+	        $this->form_validation->set_rules('appointment_date', 'appointment_date ', 'required'); 
+	        $this->form_validation->set_rules('appointment_time', 'appointment_time ', 'required'); 
+	        $this->form_validation->set_rules('patient_name', 'patient_name', 'required'); 
+	        $this->form_validation->set_rules('patient_email', 'patient_email', 'required|valid_email'); 
+	        $this->form_validation->set_rules('patient_phone', 'patient_phone', 'required'); 
+	        
+	        if ($this->form_validation->run() === FALSE) {
+	        		$data['success'] = FALSE;
+	        		$data['message'] =  'Validation error';
+	        		$this->load->view('doctor/header', $data);
+	        		$this->load->view('doctor/edit_appointment', $data);
+	        		$this->load->view('doctor/footer', $data);
+	        } else {
+	        	   $value =  $this->doctor_model->edit_appointment($appointment_id);
+	        	   if($value == TRUE){
+	        	   		$data['success'] = TRUE;
+	        			$data['message'] =  'Your appointment has been edited successfully';
+	        			$data['user_appointment'] = $this->patient_model->get_appointment($appointment_id);
+	        			$this->load->view('doctor/header', $data);
+	        			$this->load->view('doctor/edit_appointment', $data);
+	        			$this->load->view('doctor/footer', $data);
+	        	   
+	        	   } else {
+	        	   		$data['success'] = FALSE;
+	        			$data['message'] =  'Failed to edit appointment'. $value;
+	        			$this->load->view('doctor/header', $data);
+	        			$this->load->view('doctor/edit_appointment', $data);
+	        			$this->load->view('doctor/footer', $data);
+	        	   }
+		   	}
 	}
 	public function update_account_details(){
 		$this->load->library('session');
@@ -242,10 +311,10 @@ class Doctor extends CI_Controller {
 				$return = $this->doctor_model->update_appointment_status($booking_id, $status);
 
 				if($return == TRUE) {
-				    $data['status'] = TRUE;
+				    $data['success'] = TRUE;
 				    $data['message'] = 'Appointment confirmed successfully';	
 				} else {
-					$data['status'] = FALSE;
+					$data['success'] = FALSE;
 				    $data['message'] = 'Failed to update appointment status'.$return;
 				} 
 				$user_id = $data['user_session']['user_meta']['0']['id'];
@@ -274,10 +343,42 @@ class Doctor extends CI_Controller {
 				$return = $this->doctor_model->update_appointment_status($booking_id, $status);
 
 				if($return == TRUE) {
-				    $data['status'] = TRUE;
+				    $data['success'] = TRUE;
 				    $data['message'] = 'Appointment confirmed successfully';	
 				} else {
-					$data['status'] = FALSE;
+					$data['success'] = FALSE;
+				    $data['message'] = 'Failed to update appointment status'.$return;
+				} 
+				$user_id = $data['user_session']['user_meta']['0']['id'];
+				$data['user_profile'] = $this->user_model->get_user_profile($user_id);
+				$data['user_appointments'] = $this->doctor_model->get_user_appointments($user_id);
+				$this->load->helper(array('form', 'url'));
+				$this->load->view('doctor/header' , $data);
+				$this->load->view('doctor/appointments', $data);
+				$this->load->view('doctor/footer');	
+		} else {
+	 	    $data['success'] = FALSE;
+		    $data['message'] =  'login is required';
+			$this->load->helper(array('form', 'url'));
+			$this->load->view('registration/header');
+			$this->load->view('registration/index', $data);
+			$this->load->view('registration/footer');		
+		}   
+    }
+
+    // cancel appointment
+    public function cancel_appointment($booking_id) {
+    	$this->load->library('session');
+		$data['user_session'] = $this->session->all_userdata();
+		if(isset($data['user_session']['logged_in']) && $data['user_session']['logged_in'] == 'TRUE'){
+				$status = 'DECLINED';
+				$return = $this->doctor_model->update_appointment_status($booking_id, $status);
+
+				if($return == TRUE) {
+				    $data['success'] = TRUE;
+				    $data['message'] = 'Appointment cancelled';	
+				} else {
+					$data['success'] = FALSE;
 				    $data['message'] = 'Failed to update appointment status'.$return;
 				} 
 				$user_id = $data['user_session']['user_meta']['0']['id'];
@@ -303,6 +404,8 @@ class Doctor extends CI_Controller {
 		if(isset($data['user_session']['logged_in']) && $data['user_session']['logged_in'] == 'TRUE'){
 			$user_id = $data['user_session']['user_meta']['0']['id'];
 			$data['user_profile'] = $this->user_model->get_user_profile($user_id);
+			$data['doctor_reviews'] = $this->doctor_model->get_doctor_reviews($user_id);
+
 			$this->load->helper(array('form', 'url'));
 			$this->load->view('doctor/header' , $data);
 			$this->load->view('doctor/reviews', $data);

@@ -120,7 +120,7 @@
                         </a> 
                       </div>
                       <div class="modal_body">
-                         <form enctype ='multipart/form-data' class="account_details_form" name="account_details" id="account_details" <?php echo form_open_multipart('patient/update_account_details'); ?>
+                         <form enctype ='multipart/form-data' method="post" class="account_details_form" name="account_details" id="account_details" <?php echo form_open_multipart('patient/update_account_details'); ?>
                           <div class="row">
                               <div class="large-6 columns">
                                   <div class="form_group full_name">
@@ -165,7 +165,7 @@
                                   <div class="form_group full_name">
                                     <div class="account_title">
                                        PHONE NUMBER
-                                       <input type='text' name="patient_phone" class="primary_color" required="" value ="<?php echo $user_profile['0']['phone']; ?>">
+                                       <input type='text' name="patient_phone" class="primary_color" required="" value ="<?php echo "+".$user_profile['0']['phone']; ?>">
                                     </div>
                                   </div>
                               </div>

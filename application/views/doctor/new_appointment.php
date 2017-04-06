@@ -26,7 +26,11 @@
             <div class="doctors_head">
               <div class="row">
                 <div class="large-2 columns doctor_avatar">
-                    <img src="assets/img/avatar.png" class="doctor_avatar_img">
+                    <?php if (isset($user_profile)) { ?>
+                    <img src="<?php echo $user_profile['0']['user_avatar'];?>" class="doctor_avatar_img">
+                    <?php  } else { ?>
+                    <img src="<?php echo base_url('assets/img/avatar.png'); ?>" class="doctor_avatar_img">
+                    <?php } ?>
                 </div>
                 <div class="large-10 columns">
                       <div class="doctor_profile_title">

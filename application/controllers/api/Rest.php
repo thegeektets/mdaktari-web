@@ -186,6 +186,143 @@ class Rest extends REST_Controller {
         }
     }
 
+    // appointments
+
+    public function patientappointments_post(){
+        $data['doctor_id'] = $this->post('doctor_id');
+        $data['patient_id'] = $this->post('patient_id');
+        $data['patient_name'] = $this->post('patient_name');
+        $data['patient_email'] = $this->post('patient_email');
+        $data['patient_phone'] = $this->post('patient_phone');
+        $data['appointment_date'] = $this->post('appointment_date');
+        $data['appointment_time'] = $this->post('appointment_time');
+        $data['appointment_reason'] = $this->post('appointment_reason');
+        
+        if($data['doctor_id'] == NULL || $data['doctor_id'] == ''){
+            $message = [
+                'status' => 'false',
+                'message'=> 'doctor id is required'
+                ];
+            $this->response($message, REST_Controller::HTTP_BAD_REQUEST);
+
+        } else {
+                $value =  $this->doctor_model->api_add_new_appointment($data);
+                if($value == TRUE){
+                
+                     $this->response(array('status'=>'success', 'appointment'=>$data,'message'=>"appointment placed successfully"),201);
+                } else {
+                    $this->response([
+                        'status' => FALSE,
+                        'message' => 'failed to place appointment '.$value
+                    ], REST_Controller::HTTP_BAD_REQUEST); // NOT_FOUND (404) being the HTTP response code
+                }
+        }
+    }
+
+    // get patient appointments
+
+    public function patientappointments_get($user_id)
+    {   
+        $appointments = $this->patient_model->get_user_appointments($user_id);
+        
+        if($appointments !== NULL || $appointments !== ''){
+                $message = $appointments;
+                $this->set_response($message, REST_Controller::HTTP_CREATED); 
+        } else {
+            // Set the response and exit
+                $this->response([
+                    'status' => FALSE,
+                    'message' => 'Appointments not found'
+                ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+        }
+    }
+
+
+    // get doctor appointments
+
+    public function doctorappointments_get($user_id)
+    {   
+        $appointments = $this->doctor_model->get_user_appointments($user_id);
+        
+        if($appointments !== NULL || $appointments !== ''){
+                $message = $appointments;
+                $this->set_response($message, REST_Controller::HTTP_CREATED); 
+        } else {
+            // Set the response and exit
+                $this->response([
+                    'status' => FALSE,
+                    'message' => 'Appointments not found'
+                ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+        }
+    }
+
+    // get doctor reviews
+
+    public function doctorreviews_get($user_id)
+    {
+        $reviews = $this->doctor_model->get_doctor_reviews($user_id);
+        
+        if($reviews !== NULL || $reviews !== ''){
+                $message = $reviews;
+                $this->set_response($message, REST_Controller::HTTP_CREATED); 
+        } else {
+            // Set the response and exit
+                $this->response([
+                    'status' => FALSE,
+                    'message' => 'Reviews not found'
+                ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+        }
+    }
+
+    // get patient reviews
+
+     public function patientreviews_get($user_id)
+    {
+        $reviews = $this->patient_model->get_doctor_reviews($user_id);
+        
+        if($reviews !== NULL || $reviews !== ''){
+                $message = $reviews;
+                $this->set_response($message, REST_Controller::HTTP_CREATED); 
+        } else {
+            // Set the response and exit
+                $this->response([
+                    'status' => FALSE,
+                    'message' => 'Reviews not found'
+                ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+        }
+    }
+
+    // reviews post
+
+    public function doctorreviews_post()
+    {
+        $data['doctor_id'] = $this->post('doctor_id');
+        $data['patient_id'] = $this->post('patient_id');
+        $data['doctor_rating'] = $this->post('doctor_rating');
+        $data['doctor_review'] = $this->post('doctor_review');
+        
+        if($data['doctor_id'] == NULL || $data['doctor_id'] == ''){
+            $message = [
+                'status' => 'false',
+                'message'=> 'doctor id is required'
+                ];
+            $this->response($message, REST_Controller::HTTP_BAD_REQUEST);
+
+        } else {
+                
+                $value = $this->patient_model->api_review_doctor($data);
+                
+                if($value == TRUE){
+                
+                    $this->response(array('status'=>'success', 'review'=>$data,'message'=>"doctor review placed successfully"),201);
+                } else {
+                    $this->response([
+                        'status' => FALSE,
+                        'message' => 'failed to place review '.$value
+                    ], REST_Controller::HTTP_BAD_REQUEST); // NOT_FOUND (404) being the HTTP response code
+                }
+        }
+    }
 
     // booking post
     public function bookings_post(){

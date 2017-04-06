@@ -153,7 +153,6 @@ body {
   width: 100%;
   font-size: 12px;
 }
-<<<<<<< HEAD
 .button_cancel {
   background: #fff;
   color: #ff0000;
@@ -172,8 +171,6 @@ body {
   font-size: 12px;
 }
 
-=======
->>>>>>> 1db99937cfa4211d6d9ce5399ea6cba18ed50fdd
 .button_edit {
   text-align: center;
   margin-top: 5px;
@@ -509,6 +506,7 @@ img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
   display:block;
   position: relative;
   margin-top: 20px;
+  padding-bottom: 20%;
 }
 .products_title {
   font-size: 32px;
@@ -552,6 +550,9 @@ img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
   padding-bottom:25px;
   color:#666666;
 }
+.insuarance_item.expired {
+    background: #eee;
+}
 .insuarance_img {
   width: 150px;
   padding: 10px;
@@ -561,7 +562,6 @@ img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
   text-transform: uppercase;
   padding:10px;
 }
-<<<<<<< HEAD
 
 /* Appointments */
 
@@ -626,18 +626,6 @@ img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
   font-size: 12px;
   text-transform: uppercase;
   padding:10px;
-=======
-.appintment_desc {
-  display: inline-block;
-}
-.appointment_desc > h6 {
-  text-transform:uppercase;
-  font-size:14px;
-}
-.appointment_desc  > p {
-  text-transform: none;
-  font-size: 13px;
->>>>>>> 1db99937cfa4211d6d9ce5399ea6cba18ed50fdd
 }
 .insuarance_cost {
   font-weight:700;
@@ -851,15 +839,109 @@ img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
   color: #fff;
   font-weight: 400;
   font-family: 'Gotham';
+  margin-top: 1p6x;
+  font-size: 22px;
 }
 .schedule_link {
     text-align: right;
     padding: 5px;
+    color: #fff;
 }
 .schedule_link a {
-  font-size: 18px;
+  font-size: 14px;
   color: #fff;
+  margin-bottom: -7px;
 }
 .pull-left{
   float: left !important;
+}
+.button.secondary {
+    background-color: #182933 !important;
+    color: #fefefe;
+}
+.no_results {
+    padding-bottom: 20%;
+    font-size: 26px;
+    padding-top: 10%;
+}
+
+/* rating things */
+
+.rating {
+    float:left;
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+    display: none;
+}
+
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rating > input:checked ~ label {
+    color: #48ba5f;
+    text-shadow:1px 1px #39b552, 2px 2px #39b552, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: gold;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #ea0;
+    text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
+}
+
+/* Review Listing */
+
+.doctor_review {
+    text-align: left;
+}
+
+/* stars */
+
+span.stars, span.stars span {
+    display: block;
+    background: url(stars.png) 0 -16px repeat-x;
+    width: 80px;
+    height: 16px;
+}
+
+span.stars span {
+    background-position: 0 0;
 }
