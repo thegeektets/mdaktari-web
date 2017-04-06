@@ -37,9 +37,16 @@
         </div>
         <div class="row">
              <?php for($i=0 ; $i < count($user_appointments); $i++){ ?>
+<<<<<<< HEAD
              <div class="insuarance_item <?php if(date('Y-m-d H:i:s',strtotime($user_appointments[$i]['appointment_date'])) < date('Y-m-d H:i:s')){ echo 'expired';}?>">
                         <div class = "row">
                            <div class="large-2 columns">
+=======
+             <div class="insuarance_item <?php if(date('d-m-Y',strtotime($user_appointments[$i]['appointment_date'])) < date('d-m-Y')){
+                          echo 'expired';}?>">
+                        <div class = "row">
+                            <div class="large-2 columns">
+>>>>>>> 124a899e7f8a92e0b84e2d72ad7713a1ea6e0d33
                                 <img src="<?php echo $user_appointments[$i]['user_avatar']; ?>" class="user_img">
                             </div>
                             <div class="large-4 columns">
@@ -78,7 +85,11 @@
                                       <?php echo $user_appointments[$i]['appointment_time']; ?>
                                   </div>
                             </div>
+<<<<<<< HEAD
                             <?php if(date('Y-m-d H:i:s',strtotime($user_appointments[$i]['appointment_date'])) < date('Y-m-d H:i:s')){
+=======
+                            <?php if(date('d-m-Y',strtotime($user_appointments[$i]['appointment_date'])) < date('d-m-Y')){
+>>>>>>> 124a899e7f8a92e0b84e2d72ad7713a1ea6e0d33
                             ?>
                             <div class="large-2 columns">
                                   <a class="button button_appointment" href="<?php echo base_url("index.php/patient/review_doctor/".$user_appointments[$i]['doctor_id']); ?>">
@@ -91,12 +102,21 @@
                                           <div class="appointment_status">
                                               Appointment Confirmed
                                           </div>
+<<<<<<< HEAD
                                           <a class="button button_appointment" href="<?php echo base_url('index.php/patient/reschedule_appointment/'.$user_appointments[$i]['appointment_id']);?>">
                                                                                    Reschedule Appointment
                                           </a>
                                           <a  class="button button_cancel" href="<?php echo base_url("index.php/patient/cancel_appointment/".$user_appointments[$i]['appointment_id']); ?>"
 
                                           <?php if(date('Y-m-d H:i:s',strtotime($user_appointments[$i]['appointment_date'])) < date('Y-m-d H:i:s')){
+=======
+                                          <a class="button button_appointment">
+                                              Reschedule Appointment
+                                          </a>
+                                          <a  class="button button_cancel" href="<?php echo base_url("index.php/patient/cancel_appointment/".$user_appointments[$i]['appointment_id']); ?>"
+
+                                          <?php if(date('d-m-Y',strtotime($user_appointments[$i]['appointment_date'])) < date('d-m-Y')){
+>>>>>>> 124a899e7f8a92e0b84e2d72ad7713a1ea6e0d33
                                                                     echo 'disabled="true"';}?>">                           Cancel Appointment
                                           </a>
                                   <?php } else if ($user_appointments[$i]['appointment_status'] =='DECLINED') {
@@ -104,6 +124,7 @@
                                         <div class="appointment_status declined">
                                             Appointment Declined
                                         </div>
+<<<<<<< HEAD
                                         <a class="button button_appointment" href="<?php echo base_url('index.php/patient/reschedule_appointment/'.$user_appointments[$i]['appointment_id']);?>">
                                           Reschedule Appointment
                                          </a>
@@ -113,6 +134,17 @@
                                           Reschedule Appointment
                                       </a>
                                       <a class="button button_cancel" href="<?php echo base_url("index.php/patient/decline_appointment/".$user_appointments[$i]['appointment_id']); ?>"<?php if(date('Y-m-d H:i:s',strtotime($user_appointments[$i]['appointment_date'])) < date('Y-m-d H:i:s')){
+=======
+                                        <a class="button button_appointment">
+                                           Reschedule Appointment
+                                        </a> 
+                                        
+                                  <?php } else { ?>
+                                      <a class="button button_appointment">
+                                          Reschedule Appointment
+                                      </a>
+                                      <a class="button button_cancel" href="<?php echo base_url("index.php/patient/decline_appointment/".$user_appointments[$i]['appointment_id']); ?>"<?php if(date('d-m-Y',strtotime($user_appointments[$i]['appointment_date'])) < date('d-m-Y')){
+>>>>>>> 124a899e7f8a92e0b84e2d72ad7713a1ea6e0d33
                                                                     echo 'disabled="true"';}?>">
                                           Cancel ppointment
                                       </a>

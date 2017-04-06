@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <?php //error_reporting(0); ?>
+=======
+<?php error_reporting(0); ?>
+>>>>>>> 124a899e7f8a92e0b84e2d72ad7713a1ea6e0d33
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
   <head>
