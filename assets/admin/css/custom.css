@@ -1,0 +1,61 @@
+.navbar-inverse {
+    background-color: #38b451;
+    background-image: linear-gradient(to right, #FFFFFF , #38b451);
+    height: 86px;
+}
+.main-container {
+    margin-top: 86px;
+}
+
+.navbar-brand img {
+    display: block;
+    float: left;
+    width: 80px;
+}
+.footer, .main-container, .main-navigation, .navigation-small ul.main-navigation-menu>li>ul.sub-menu, body, ul.main-navigation-menu>li>ul.sub-menu {
+	background-color: rgb(24, 41, 51);
+}
+ul.main-navigation-menu>li.active>a {
+    background: rgb(56, 180, 81)!important;
+    border-top: none!important;
+    color: #fff;
+}
+ul.main-navigation-menu>li a {
+    border-bottom: none;
+    border-top-color: #d9d9d9;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight:normal;
+    line-height: 16px;
+    font-size: 16px;
+}
+ul.main-navigation-menu>li a>i {
+    color: #fff;
+    font-weight: 400;
+}
+ul.main-navigation-menu>li.open, ul.main-navigation-menu>li:hover>a, ul.main-navigation-menu>li>a:hover, ul.main-navigation-menu>li a>i:hover {
+    background-color: #fff;
+    color: rgb(24, 41, 51);
+}
+
+ul.main-navigation-menu>li.active>a .selected:before {
+    color: rgb(56, 180, 81)!important;
+}
+.breadcrumb a {
+    color: rgb(56, 180, 81);
+}
+.breadcrumb i {
+    color: rgb(56, 180, 81);
+}
+.go-top, .navigation-toggler {
+    background-color: rgb(56, 180, 81)!important;
+    color: #fff;
+}
+.btn, .btn-icon .badge, body {
+    font-family: 'Gotham';
+}
+.user_avatar {
+    width: 50px;
+    margin: 5px;
+    display: inline-block;
+}

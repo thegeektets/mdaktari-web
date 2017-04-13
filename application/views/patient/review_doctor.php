@@ -29,10 +29,6 @@
                       <div class="doctor_profile_title">
                           <h3> <?php echo $doctor_profile[0]['fullname'] ?> </h3>
                           <h5> <?php echo $doctor_profile[0]['speciality'] ?> </h5>
-<<<<<<< HEAD
-=======
-                          <h6> <a href=""> Patient Reviews </a> </h6>
->>>>>>> 124a899e7f8a92e0b84e2d72ad7713a1ea6e0d33
                       </div>
                 </div>
               </div>
@@ -42,7 +38,6 @@
         <div class="row">
           <div class="large-8 columns"> 
               <div class="row">
-<<<<<<< HEAD
                   <?php
                         if( isset($success) && ($success === TRUE)) {
                             echo '<div class="alert-box success">'
@@ -58,8 +53,6 @@
                      ?>
               </div>
               <div class="row">
-=======
->>>>>>> 124a899e7f8a92e0b84e2d72ad7713a1ea6e0d33
                   <div class="doctors_qualification">
                     <div class="row">
                       <h3> Qualifications and Experience </h3>
@@ -132,19 +125,13 @@
                    ?>
                 <div class="message">
                 </div>
-<<<<<<< HEAD
                 <form method="post" class="review_form" name="review_form" id="review_form" <?php echo form_open('patient/doctor_review/'.$doctor_profile['0']['user_id']); ?>
-=======
-                <form method="post" class="appointment_form" name="new_appointment" id="new_appointment"
-                onsubmit="return book_appointment()">
->>>>>>> 124a899e7f8a92e0b84e2d72ad7713a1ea6e0d33
 
                   <h3> Review Doctor </h3>
                   
                   <div class="appointment_details">
                     <div class="input-group">
                       <label> Doctor Rating : </label>
-<<<<<<< HEAD
                         <span class="rating">
                           <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
                               <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
@@ -153,37 +140,13 @@
                               <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
                         </span>
 
-=======
-                      <span class="rating">
-                              <input type="radio" class="rating-input"
-                                  id="rating-input-1-5" name="rating-input-1">
-                              <label for="rating-input-1-5" class="rating-star"></label>
-                              <input type="radio" class="rating-input"
-                                  id="rating-input-1-4" name="rating-input-1">
-                              <label for="rating-input-1-4" class="rating-star"></label>
-                              <input type="radio" class="rating-input"
-                                  id="rating-input-1-3" name="rating-input-1">
-                              <label for="rating-input-1-3" class="rating-star"></label>
-                              <input type="radio" class="rating-input"
-                                  id="rating-input-1-2" name="rating-input-1">
-                              <label for="rating-input-1-2" class="rating-star"></label>
-                              <input type="radio" class="rating-input"
-                                  id="rating-input-1-1" name="rating-input-1">
-                              <label for="rating-input-1-1" class="rating-star"></label>
-                          </span>
->>>>>>> 124a899e7f8a92e0b84e2d72ad7713a1ea6e0d33
                     </div>
 
                     <div class="input-group">
                         <label> Doctor Review : </label>
                         <input type="hidden" name="doctor_id" value="<?php echo $doctor_profile[0]['user_id'] ?>">
-<<<<<<< HEAD
                         <textarea type="text" rows="5" name="doctor_review" placeholder="Doctor Review" class="primary_color" value="<?php echo set_value('doctor_review'); ?>" required>
                             <?php echo set_value('doctor_review'); ?>
-=======
-                        <textarea type="text" name="appointment_reason" placeholder="Visit Reason" class="primary_color" value="<?php echo set_value('appointment_reason'); ?>">
-                            <?php echo set_value('appointment_reason'); ?>
->>>>>>> 124a899e7f8a92e0b84e2d72ad7713a1ea6e0d33
                         </textarea>
                     </div>
                   

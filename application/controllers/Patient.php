@@ -235,7 +235,6 @@ class Patient extends CI_Controller {
 			} else {
 				$data['success'] = TRUE;
 				$data['message'] = "The Review has been Updated Successfully";
-				$data['review'] = $this->patient_model->get_review($review_id);
 			}
 			$this->load->helper(array('form', 'url'));
 			$this->load->view('patient/header' , $data);
@@ -467,9 +466,7 @@ class Patient extends CI_Controller {
 		$data['user_session'] = $this->session->all_userdata();
 		$user_id = $data['user_session']['user_meta']['0']['id'];
 		$data['user_profile'] = $this->user_model->get_user_profile($user_id);
-		$data['doctor_profile'] = $this->doctor_model->get_doctor_profile($doctor_id);
-		$data['user_appointments'] = $this->patient_model->get_user_appointments($user_id);
-			
+		$data['doctor_profile'] = $this->doctor_model->get_doctor_profile($doctor_id);	
 		$this->load->helper(array('form', 'url'));
 	    	$this->load->library('form_validation');
 	        $this->form_validation->set_rules('appointment_reason', 'appointment_reason ', 'required'); 
@@ -487,7 +484,6 @@ class Patient extends CI_Controller {
 	        		$this->load->view('patient/footer', $data);
 	        } else {
 	        	   $value =  $this->doctor_model->add_new_appointment($doctor_id);
-	        	   $data['user_appointments'] = $this->patient_model->get_user_appointments($user_id);
 	        	   if($value == TRUE){
 	        	   		$data['success'] = TRUE;
 	        			$data['message'] =  'Added new appointment';

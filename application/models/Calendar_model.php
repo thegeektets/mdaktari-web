@@ -87,6 +87,8 @@ class Calendar_model extends CI_Model {
     }
 
     public function load_bookings($doctor_id , $date ) {
+        $date = date('Y-m-d', strtotime($date));
+        
         $query = $this->db->query("select * from bookings_calendar WHERE doctor_id = ".$doctor_id." AND appointment_date = '".$date."'" );
         return $query-> result_array();
     }
@@ -196,12 +198,13 @@ class Calendar_model extends CI_Model {
     }
     
     // mirror function check date availability for api
-
+        
     public function check_doctor_availability ($doctor_id, $appointment_date) {
 
         $day = date("D", strtotime($appointment_date));
 
         $query = $this->db->query('select * from calendar_settings WHERE doctor_id = '.$doctor_id.' AND  work_day LIKE "'.$day.'%"');
+        
         $result = $query->result_array();
         
         $off_day = $result['0']['off_day'];
@@ -210,14 +213,18 @@ class Calendar_model extends CI_Model {
         $session = $result['0']['sess_duration'];
 
         $bookings = $this->load_bookings($doctor_id , $appointment_date);
+        
+        
         if($off_day == TRUE){
             return 0;
         } else {
             // check if day is on personal shedule - if not check bookings
 
             $queryp = $this->db->query('select * from schedule_calendar WHERE doctor_id = '.$doctor_id.' AND date = "'.$appointment_date.'"');
+            
             $resultp = $queryp->result_array();
 
+           
             if(count($resultp)< 1){
                 
                 // echo 'date is not on personal schedule';
@@ -231,7 +238,7 @@ class Calendar_model extends CI_Model {
                     $time_array[$t] = date('H:i:s', strtotime('+'.$session*$t.'hours', strtotime($start_time)));  
                 }
 
-                for($b=0; $b < count($bookings); $b++){
+                 for($b=0; $b < count($bookings); $b++){
                     $bookings_array[$b] = $bookings[$b]['appointment_time'];
                 }
 
@@ -239,7 +246,7 @@ class Calendar_model extends CI_Model {
                 $result_array = array_diff($time_array, $bookings_array);
                 
                 return $result_array;
-
+               
 
             } else {
                 // check hours

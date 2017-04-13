@@ -868,7 +868,6 @@ img.avatar_select:hover, img.avatar_select:focus, img.avatar_select:active {
 /* rating things */
 
 .rating {
-<<<<<<< HEAD
     float:left;
     position: relative;
     display: block;
@@ -944,26 +943,5 @@ span.stars, span.stars span {
 }
 
 span.stars span {
-=======
-    overflow: hidden;
-    display: inline-block;
-}
-.rating-input {
-    position: absolute;
-    left: 0;
-    top: -50px;
-    display: none;
-}
-.rating-star {        
-    display: block;
-    float: right;        
-    width: 16px;
-    height: 16px;
-    background-color: #3bb554;
-    background: url('http://kubyshkin.ru/samples/star-rating/star.png') 0 -16px;
-}
-.rating-star:hover,
-.rating-star:hover ~ .rating-star {
->>>>>>> 124a899e7f8a92e0b84e2d72ad7713a1ea6e0d33
     background-position: 0 0;
 }

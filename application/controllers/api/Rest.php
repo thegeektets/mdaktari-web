@@ -174,7 +174,7 @@ class Rest extends REST_Controller {
         } else {
             $result = $this->calendar_model->check_doctor_availability($doctor_id, $appointment_date);
             if(is_array($result)){
-                $this->response(array('status'=>'success','available_time'=>$result),201);
+                $this-> (array('status'=>'success','available_time'=>$result),201);
             } else {
                    $message = [
                    'status' => 'false',

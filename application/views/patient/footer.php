@@ -47,13 +47,10 @@
     <script src="<?php echo base_url('/assets/js/vendor/foundation.js')?>"></script>
     <script src="<?php echo base_url('/assets/js/app.js')?>"></script>
         <script type="text/javascript">
-<<<<<<< HEAD
         $('label').click(function(e) {
            // e.preventDefault();
             //do other stuff when a click happens
         });
-=======
->>>>>>> 124a899e7f8a92e0b84e2d72ad7713a1ea6e0d33
         $('.disabled').click(function(e) {
             e.preventDefault();
             //do other stuff when a click happens

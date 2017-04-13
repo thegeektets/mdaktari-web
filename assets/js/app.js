@@ -1,6 +1,5 @@
 $(document).foundation()
 
-<<<<<<< HEAD
 $(function() {
     $('span.stars').stars();
 });
@@ -18,18 +17,13 @@ $.fn.stars = function() {
     });
 }
 
-=======
->>>>>>> 124a899e7f8a92e0b84e2d72ad7713a1ea6e0d33
 $(document).ready(function(){
 	
 	var state = "open";
 	var popup_state = "closed";
 	var close_btn = "false";
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 124a899e7f8a92e0b84e2d72ad7713a1ea6e0d33
 	$(".edit_details_modal").hide();
 
 
