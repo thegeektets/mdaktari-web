@@ -41,6 +41,42 @@ class User_model extends CI_Model {
                         return TRUE;
                     }
         }
+        // mirror api function to insert new patient
+
+
+        public function api_insert_new_patient($data) {
+            $password = $data['password'];
+            $useremail = $data['email'];
+            $usertype = 'patient';
+
+            // patient details 
+
+            $fullname = $data['fullname'];
+            $phone = $data['phone'];
+            $town = $data['town'];
+            $country = $data['country'];
+            $address = $data['address'];
+            
+         
+            $this->db->db_debug = FALSE;
+            $sql = "INSERT INTO user (email, password, user_type) " .
+            " VALUES (" .$this->db->escape($useremail) .",".$this->db->escape(md5($password)) .",".$this->db->escape($usertype) .")";
+                   
+                    if(!$this->db->query($sql)) {
+                        return $this->db->error(); 
+                    } else {
+                        $fquery = $this->db->query("select * from user where email = '".$useremail ."'");
+                        
+                        foreach ($fquery->result() as $row)
+                            {
+                            $queryid = $row->id;
+                            }
+                        $query = "INSERT INTO patient_table (user_id,fullname,town,country,postal_address,phone)" .
+                        "VALUES (" . $this->db->escape($queryid).",".$this->db->escape($fullname).",".$this->db->escape($town).",".$this->db->escape($country).",".$this->db->escape($address).",".$this->db->escape($phone).")";
+                        return $this->db->query($query);
+                        
+                    }
+        }
         public function insert_new_doctor() {
             $password = $this->input->post("doctor_password");
             $useremail = $this->input->post("doctor_email");
@@ -73,6 +109,42 @@ class User_model extends CI_Model {
                         "VALUES (" . $this->db->escape($queryid).",".$this->db->escape($fullname).",".$this->db->escape($town).",".$this->db->escape($country).",".$this->db->escape($address).",".$this->db->escape($phone).",".$this->db->escape($speciality).")";
                          $this->db->query($query);
                         return TRUE;
+                    }
+        }
+        // mirror api function for inserting new doctor 
+        public function api_insert_new_doctor($data) {
+            $password = $data['password'];
+            
+            $useremail = $data['email'];
+
+            $usertype = 'doctor';
+
+            // doctor details 
+
+            $fullname = $data['fullname'];
+            $phone = $data['phone'];
+            $town = $data['town'];
+            $country = $data['country'];
+            $address = $data['address'];
+            $speciality = $data['speciality'];
+            
+            
+            $this->db->db_debug = FALSE;
+            $sql = "INSERT INTO user (email, password, user_type) " .
+            " VALUES (" .$this->db->escape($useremail) .",".$this->db->escape(md5($password)) .",".$this->db->escape($usertype) .")";
+                   
+                    if(!$this->db->query($sql)) {
+                        return $this->db->error(); 
+                    } else {
+                        $fquery = $this->db->query("select * from user where email = '".$useremail ."'");
+                        
+                        foreach ($fquery->result() as $row)
+                            {
+                            $queryid = $row->id;
+                            }
+                        $query = "INSERT INTO doctor_table (user_id,fullname,town,country,postal_address,phone,speciality)" .
+                        "VALUES (" . $this->db->escape($queryid).",".$this->db->escape($fullname).",".$this->db->escape($town).",".$this->db->escape($country).",".$this->db->escape($address).",".$this->db->escape($phone).",".$this->db->escape($speciality).")";
+                        return $this->db->query($query);
                     }
         }
         public function update_user_password($password) {

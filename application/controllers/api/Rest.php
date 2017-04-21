@@ -66,6 +66,61 @@ class Rest extends REST_Controller {
         }
     }
 
+    // register a new doctor
+    public function doctors_post() {
+       $data = array(
+        
+        'fullname' => $this->post('fullname'),
+        'speciality' => $this->post('speciality'),
+        'email' => $this->post('email'),
+        'phone' => $this->post('phone'),
+        'town' => $this->post('town'),
+        'country' => $this->post('country'),
+        'address' => $this->post('address'),
+        'password' => $this->post('password')
+
+        );
+
+        $result = $this->user_model->api_insert_new_doctor($data);
+        
+        if($result == TRUE){
+          $this->response(array('doctor'=>$data,'message'=>"Successfully created your Mdaktari doctor account"),201);
+        } else {
+            $message = [
+            'status' => 'false',
+            'message'=> $result
+            ];
+         $this->response($message, REST_Controller::HTTP_BAD_REQUEST);
+        }
+           
+       
+    }
+    
+    // register a new patient
+    public function patients_post() {
+       $data = array(
+        'fullname' => $this->post('fullname'),
+        'email' => $this->post('email'),
+        'phone' => $this->post('phone'),
+        'town' => $this->post('town'),
+        'country' => $this->post('country'),
+        'address' => $this->post('address'),
+        'password' => $this->post('password')
+        );
+
+        $result = $this->user_model->api_insert_new_patient($data);
+            if($result == TRUE){
+              $this->response(array('patient'=>$data,'message'=>"Successfully created your Mdaktari patient account"),201);
+            
+            } else {
+                $message = [
+                'status' => 'false',
+                'message'=> $result
+                ];
+             $this->response($message, REST_Controller::HTTP_BAD_REQUEST);
+            }
+           
+    }
     // update doctor account details
     public function doctors_put() {
        $data = array(
@@ -92,7 +147,7 @@ class Rest extends REST_Controller {
         $result = $this->doctor_model->update_doctor($data);
            if($this->put('id') !== NULL){
                 if($result == TRUE){
-                  $this->response(array('doctor'=>$data,'message'=>"Successfully updated doctor"),201);
+                  $this->response(array('doctor'=>$data,'message'=>"Successfully updated doctor profile"),201);
                 } else {
                     $message = [
                     'status' => 'false',
@@ -128,7 +183,7 @@ class Rest extends REST_Controller {
         $result = $this->patient_model->update_patient($data);
            if($this->put('id') !== NULL){
                 if($result == TRUE){
-                  $this->response(array('patient'=>$data,'message'=>"Successfully updated patient"),201);
+                  $this->response(array('patient'=>$data,'message'=>"Successfully updated patient profile"),201);
                 
                 } else {
                     $message = [
@@ -214,6 +269,42 @@ class Rest extends REST_Controller {
                     $this->response([
                         'status' => FALSE,
                         'message' => 'failed to place appointment '.$value
+                    ], REST_Controller::HTTP_BAD_REQUEST); // NOT_FOUND (404) being the HTTP response code
+                }
+        }
+    }
+
+
+    // appointments update
+
+    public function patientappointments_put(){
+       
+        $data['appointment_id'] = $this->put('appointment_id');
+        $data['doctor_id'] = $this->put('doctor_id');
+        $data['patient_id'] = $this->put('patient_id');
+        $data['patient_name'] = $this->put('patient_name');
+        $data['patient_email'] = $this->put('patient_email');
+        $data['patient_phone'] = $this->put('patient_phone');
+        $data['appointment_date'] = $this->put('appointment_date');
+        $data['appointment_time'] = $this->put('appointment_time');
+        $data['appointment_reason'] = $this->put('appointment_reason');
+        
+        if($data['doctor_id'] == NULL || $data['doctor_id'] == ''){
+            $message = [
+                'status' => 'false',
+                'message'=> 'doctor id is required'
+                ];
+            $this->response($message, REST_Controller::HTTP_BAD_REQUEST);
+
+        } else {
+                $value =  $this->doctor_model->api_edit_appointment($data);
+                if($value == TRUE){
+                
+                     $this->response(array('status'=>'success', 'appointment'=>$data,'message'=>"appointment updated successfully"),201);
+                } else {
+                    $this->response([
+                        'status' => FALSE,
+                        'message' => 'failed to update appointment '.$value
                     ], REST_Controller::HTTP_BAD_REQUEST); // NOT_FOUND (404) being the HTTP response code
                 }
         }

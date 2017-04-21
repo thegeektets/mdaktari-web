@@ -88,6 +88,25 @@ class Doctor_model extends CI_Model {
                 return $this->db->query($query);
         }
 
+        // edit appointment api mirror function
+
+        public function api_edit_appointment($data) {
+            $appointment_id = $data['appointment_id'];
+
+            $doctor_id = $data['doctor_id'];
+            $patient_id = $data['patient_id'];
+            $patient_name = $data['patient_name'];
+            $patient_email = $data['patient_email'];
+            $patient_phone = $data['patient_phone'];
+            $appointment_date = $data['appointment_date'];
+            $appointment_time = $data['appointment_time'];
+            $appointment_reason = $data['appointment_reason'];
+
+
+            $query = "UPDATE bookings_calendar SET appointment_reason = ". $this->db->escape($appointment_reason).", appointment_date = ". $this->db->escape($appointment_date).", appointment_time = ". $this->db->escape($appointment_time).", patient_name = ". $this->db->escape($patient_name).", patient_email = ". $this->db->escape($patient_email).", patient_phone = ". $this->db->escape($patient_phone).", appointment_status =". $this->db->escape('PENDING')." WHERE appointment_id = ". $this->db->escape($appointment_id);
+            return  $this->db->query($query);
+        }
+
         // edit appointment
 
         public function edit_appointment($appointment_id) {
