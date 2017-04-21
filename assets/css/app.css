@@ -304,6 +304,10 @@ body {
   text-align: left;
 }
 
+form label {
+    color: #fff !important;
+}
+
 /* my pimabima */
 
 .my_pimabima {

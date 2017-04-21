@@ -197,6 +197,7 @@ class Calendar_model extends CI_Model {
         }
     }
     
+   
     // mirror function check date availability for api
         
     public function check_doctor_availability ($doctor_id, $appointment_date) {
@@ -242,10 +243,9 @@ class Calendar_model extends CI_Model {
                     $bookings_array[$b] = $bookings[$b]['appointment_time'];
                 }
 
-                $result_array = array();
                 $result_array = array_diff($time_array, $bookings_array);
                 
-                return $result_array;
+                return array_values($result_array);
                
 
             } else {
@@ -292,10 +292,9 @@ class Calendar_model extends CI_Model {
                            $bookings_array[$b] = $bookings[$b]['appointment_time'];
                        }
 
-                       $result_array = array();
                        $result_array = array_diff($time_array, $bookings_array);
                        
-                       return $result_array;
+                       return array_values($result_array);
 
                 }
             }

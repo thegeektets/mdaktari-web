@@ -75,13 +75,13 @@ class Doctor_model extends CI_Model {
 
         public function api_add_new_appointment($data) {
             $doctor_id = $data['doctor_id'];
-            $patient_id = $data['patient_id'] = $this->post('patient_id');
-            $patient_name = $data['patient_name'] = $this->post('patient_name');
-            $patient_email = $data['patient_email'] = $this->post('patient_email');
-            $patient_phone = $data['patient_phone'] = $this->post('patient_phone');
-            $appointment_date = $data['appointment_date'] = $this->post('appointment_date');
-            $appointment_time = $data['appointment_time'] = $this->post('appointment_time');
-            $appointment_reason = $data['appointment_reason'] = $this->post('appointment_reason');
+            $patient_id = $data['patient_id'];
+            $patient_name = $data['patient_name'];
+            $patient_email = $data['patient_email'];
+            $patient_phone = $data['patient_phone'];
+            $appointment_date = $data['appointment_date'];
+            $appointment_time = $data['appointment_time'];
+            $appointment_reason = $data['appointment_reason'];
 
             $query = "INSERT INTO bookings_calendar (doctor_id, appointment_reason, appointment_date, appointment_time, patient_name, patient_email, patient_phone, appointment_status, patient_id) 
                       VALUES (". $this->db-> escape($doctor_id).", ". $this->db->escape($appointment_reason).", ". $this->db->escape($appointment_date).", ". $this->db->escape($appointment_time).", ". $this->db->escape($patient_name).", ". $this->db->escape($patient_email).", ". $this->db->escape($patient_phone).", ". $this->db->escape('PENDING').", ". $this->db->escape($patient_id).")";
